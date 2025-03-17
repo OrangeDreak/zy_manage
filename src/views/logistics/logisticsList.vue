@@ -755,7 +755,7 @@ export default {
     ...mapActions(["getAreaList", "getWarehouseList", "getProductTypeList"]),
     getLogustucsIds() {
       getLineCodeList().then((res) => {
-        this.outLineIdList = res.data.data || [];
+        this.outLineIdList = res || [];
       });
     },
     outLineIdChange() {
@@ -807,8 +807,8 @@ export default {
         ...Object.assign(params, this.query),
       };
       getList(param).then((res) => {
-        if (res && res.data && res.data.data) {
-          const data = res.data.data;
+        if (res) {
+          const data = res;
           this.page.total = Number(data.total || 0);
           this.data = (data.records || []).map((item) => this.handleData(item));
           this.loading = false;

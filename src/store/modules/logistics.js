@@ -1,5 +1,5 @@
-import { getAreaLibrary, getProductTypeLabel, getRegion } from "@/api/logistics/logistics";
-import { getWarehouseList } from "@/api/logistics/warehouse";
+import { getAreaLibrary, getProductTypeLabel, getRegion } from "@/api/logistics";
+import { getWarehouseList } from "@/api/warehouse";
 
 const logistics = {
   state: {

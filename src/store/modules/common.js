@@ -2,7 +2,7 @@ import {
   setStore,
   getStore,
   removeStore
-} from '@/util/store'
+} from '@/utils/store'
 import website from '@/config/website'
 
 const common = {
