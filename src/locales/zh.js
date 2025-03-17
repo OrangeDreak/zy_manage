@@ -22,7 +22,8 @@ export default {
     dashboard: '控制台',
     settings: '系统设置',
     help: '帮助中心',
-    notification: '消息通知'
+    notification: '消息通知',
+    dict: '字典管理',
   },
   assets: {
     balance: {

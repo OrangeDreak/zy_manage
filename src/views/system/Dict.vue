@@ -1,5 +1,5 @@
 <template>
-  <basic-container>
+  <div>
     <avue-crud
       :option="option"
       :table-loading="loading"
@@ -27,13 +27,13 @@
         </el-button>
       </template>
     </avue-crud>
-  </basic-container>
+  </div>
 </template>
 
 <script>
 import { add, getDict, getDictTree, getList, remove, update } from "@/api/dict";
 import basicContainer from '@/components/basic-container/main.vue'
-
+import '@smallwei/avue/lib/index.css'
 
 export default {
   data() {
@@ -54,7 +54,7 @@ export default {
         tree: true,
         border: true,
         index: true,
-        selection: true,
+        selection: false,
         viewBtn: true,
         menuWidth: 300,
         column: [
@@ -200,8 +200,6 @@ export default {
         type: "warning",
       })
         .then(() => {
-          console.log(row);
-
           return remove(row.id);
         })
         .then(() => {
@@ -228,7 +226,7 @@ export default {
     beforeOpen(done, type) {
       if (["edit", "view"].includes(type)) {
         getDict(this.form.id).then((res) => {
-          this.form = res.data.data;
+          this.form = res;
         });
       }
       done();
@@ -246,6 +244,7 @@ export default {
         this.loading = false;
         getDictTree().then((res) => {
           const column = this.findObject(this.option.column, "parentId");
+          console.log(res);
           column.dicData = res;
         });
       });

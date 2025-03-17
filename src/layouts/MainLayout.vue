@@ -93,6 +93,11 @@
             <el-icon><Plus /></el-icon>
             <span>{{ $t('menu.addTransfer') }}</span>
           </el-menu-item>
+
+          <el-menu-item index="/dict">
+             <el-icon><Notebook /></el-icon>
+             <span>{{ $t('menu.dict') }}</span>
+             </el-menu-item>
         </el-menu>
       </el-aside>
 

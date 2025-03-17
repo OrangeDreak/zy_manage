@@ -7,9 +7,9 @@ export const getList = (current, size, params) => {
     data: params,
   });
 };
-export const remove = (id) => {
+export const remove = (ids) => {
   return request({
-    url: "/admin/dict/remove?id=" + id,
+    url: "/admin/dict/remove?id=" + ids,
     method: "post",
     params: {
       ids,

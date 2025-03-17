@@ -22,7 +22,8 @@ export default {
     dashboard: 'Dashboard',
     settings: 'Settings',
     help: 'Help Center',
-    notification: 'Notifications'
+    notification: 'Notifications',
+    dict: 'System Dict',
   },
   assets: {
     balance: {
