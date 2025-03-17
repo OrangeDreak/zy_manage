@@ -755,7 +755,7 @@ export default {
     ...mapActions(["getAreaList", "getWarehouseList", "getProductTypeList"]),
     getLogustucsIds() {
       getLineCodeList().then((res) => {
-        this.outLineIdList = res || [];
+        this.outLineIdList = res.data || [];
       });
     },
     outLineIdChange() {
@@ -807,10 +807,10 @@ export default {
         ...Object.assign(params, this.query),
       };
       getList(param).then((res) => {
-        if (res) {
-          const data = res;
-          this.page.total = Number(data.total || 0);
-          this.data = (data.records || []).map((item) => this.handleData(item));
+        if (res && res.data) {
+          const data = res.data;
+          this.page.total = Number(res.total || 0);
+          this.data = (data || []).map((item) => this.handleData(item));
           this.loading = false;
         }
       });
@@ -999,8 +999,8 @@ export default {
       if (["edit", "view"].includes(type)) {
         const param = { logisticsLineId: this.form.logisticsLineId };
         detail(param).then((res) => {
-          this.form = this.handleData(res.data.data);
-          // this.outLineInfo = res.data.data.info || {};
+          this.form = this.handleData(res.data);
+          // this.outLineInfo = res.data.info || {};
           this.outLineIdChange();
         });
       }

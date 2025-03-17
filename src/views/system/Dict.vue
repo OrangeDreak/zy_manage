@@ -226,7 +226,7 @@ export default {
     beforeOpen(done, type) {
       if (["edit", "view"].includes(type)) {
         getDict(this.form.id).then((res) => {
-          this.form = res;
+          this.form = res.data;
         });
       }
       done();
@@ -240,12 +240,11 @@ export default {
     onLoad(page, params = {}) {
       this.loading = true;
       getList(page.currentPage, page.pageSize, Object.assign(params, this.query)).then((res) => {
-        this.data = res;
+        this.data = res.data;
         this.loading = false;
         getDictTree().then((res) => {
           const column = this.findObject(this.option.column, "parentId");
-          console.log(res);
-          column.dicData = res;
+          column.dicData = res.data;
         });
       });
     },
