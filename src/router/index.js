@@ -9,12 +9,6 @@ const routes = [
     meta: { title: '登录' }
   },
   {
-    path: '/register',
-    name: 'Register',
-    component: () => import('@/views/auth/Register.vue'),
-    meta: { title: '注册' }
-  },
-  {
     path: '/add-transfer',
     name: 'AddTransfer',
     component: () => import('@/views/transfer/AddTransferOrder.vue'),
