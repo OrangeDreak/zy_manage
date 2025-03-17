@@ -13,20 +13,7 @@
       <div class="login-left">
         <div class="logo">QC elf</div>
         <div class="slogan">
-          <div class="slogan-text">中国购物，递送全球</div>
-          <div class="features">
-            <div class="feature-item">
-              <div class="feature-title">免费保险</div>
-              <div class="feature-desc">保证您的资金安全</div>
-            </div>
-            <div class="feature-item">
-              <div class="feature-title">7*12客服</div>
-              <div class="feature-desc">全球覆盖</div>
-            </div>
-            <div class="feature-item">
-              <div class="feature-title">100+航运公司</div>
-              <div class="feature-desc">可靠的售后服务</div>
-            </div>
+          <div class="slogan-text">管理后台</div>
           </div>
         </div>
       </div>
@@ -39,7 +26,7 @@
           <el-form ref="formRef" :model="loginForm" :rules="rules">
             <el-form-item prop="username">
               <el-input 
-                v-model="loginForm.username"
+                v-model="loginForm.loginName"
                 placeholder="电子邮箱"
                 prefix-icon="Message"
               />
@@ -54,12 +41,6 @@
                 show-password
               />
             </el-form-item>
-
-            <div class="form-options">
-              <span class="forgot-password">忘记密码?</span>
-              <el-link type="primary" @click="$router.push('/register')">注册</el-link>
-            </div>
-
             <el-form-item>
               <el-button 
                 type="primary" 
@@ -92,12 +73,12 @@ const loading = ref(false)
 const currentTime = ref('')
 
 const loginForm = ref({
-  username: '',
+  loginName: '',
   password: ''
 })
 
 const rules = {
-  username: [
+  loginName: [
     { required: true, message: '请输入邮箱', trigger: 'blur' },
     { type: 'email', message: '请输入正确的邮箱地址', trigger: 'blur' }
   ],
