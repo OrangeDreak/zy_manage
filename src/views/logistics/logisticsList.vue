@@ -282,7 +282,7 @@
 
 <script>
 import { mapActions, mapState } from "vuex";
-import { convertFenToYuan, convertYuanToFen } from "@/util/commonUtil.js";
+import { convertFenToYuan, convertYuanToFen } from "@/util/commonUtil";
 import {
   getList,
   detail,
