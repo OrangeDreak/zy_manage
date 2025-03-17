@@ -324,6 +324,7 @@ export default {
         return;
       }
 
+
       const param = {
         ...this.logisticsInfo,
         logisticsLineCostList: _logisticsLineCostList,
@@ -350,7 +351,7 @@ export default {
 <style scoped="scoped" lang="scss">
 @import "@/styles/flex.scss";
 @import "@/styles/commonStyle.scss";
-@import '@smallwei/avue/lib/index.css'
+@import '@smallwei/avue/lib/index.css';
 .btns {
   display: flex;
   justify-content: space-between;

@@ -48,7 +48,7 @@
 </template>
 
 <script>
-import { bindOutLine } from "@/api/logistics/logistics";
+import { bindOutLine } from "@/api/logistics";
 export default {
   data() {
     return {

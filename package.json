@@ -12,7 +12,8 @@
     "@smallwei/avue": "^3.6.3",
     "vue": "^3.5.13",
     "vue-echarts": "^7.0.3",
-    "vue-i18n": "^11.1.2"
+    "vue-i18n": "^11.1.2",
+    "vuex": "^4.1.0"
   },
   "devDependencies": {
     "@element-plus/icons-vue": "^2.3.1",
