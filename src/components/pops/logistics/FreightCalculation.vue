@@ -62,8 +62,8 @@
 
 <script>
 import cloneDeep from "lodash-es/cloneDeep";
-import { convertFenToYuan } from "@/util/commonUtil.js";
-import { calculate, getListArea } from "@/api/logistics/logistics";
+import { convertFenToYuan } from "@/utils/commonUtil.js";
+import { calculate, getListArea } from "@/api/logistics";
 
 export default {
   components: {},

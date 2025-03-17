@@ -282,7 +282,7 @@
 
 <script>
 import { mapActions, mapState } from "vuex";
-import { convertFenToYuan, convertYuanToFen } from "@/util/commonUtil.js";
+import { convertFenToYuan, convertYuanToFen } from "@/utils/commonUtil.js";
 import {
   getList,
   detail,
@@ -290,7 +290,7 @@ import {
   updateStatus,
   save,
   getLineCodeList,
-} from "@/api/logistics/logistics";
+} from "@/api/logistics";
 import FreightCalculation from "@/components/pops/logistics/FreightCalculation.vue";
 import BindLineDialog from "./components/bindLineDialog.vue";
 
@@ -1023,7 +1023,7 @@ export default {
 <style scoped="scoped" lang="scss">
 @import "@/styles/flex.scss";
 @import "@/styles/commonStyle.scss";
-@import '@smallwei/avue/lib/index.css'
+@import '@smallwei/avue/lib/index.css';
 
 .package-limit {
   display: flex;
