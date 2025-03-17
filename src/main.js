@@ -10,6 +10,7 @@ import router from './router'
 import { createI18n } from 'vue-i18n'
 import en from './locales/en'
 import zh from './locales/zh'
+import "./styles/common.scss"
 
 
 // 自定义 Element Plus 主题
