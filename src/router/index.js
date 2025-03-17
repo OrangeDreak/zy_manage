@@ -74,11 +74,17 @@ const routes = [
         meta: { title: '提交转运', requiresAuth: true }
       },
       {
-         path: '/dict',
-         name: 'Dict',
-         component: () => import('@/views/system/Dict.vue'),
-         meta: { title: '字典管理' }
-        },
+        path: '/dict',
+        name: 'Dict',
+        component: () => import('@/views/system/Dict.vue'),
+        meta: { title: '字典管理' }
+      },
+      {
+        path: '/logisticsList',
+        name: 'LogisticsList',
+        component: () => import('@/views/logistics/logisticsList.vue'),
+        meta: { title: '干线管理' }
+      },
     ]
   }
 ]

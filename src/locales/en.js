@@ -24,6 +24,7 @@ export default {
     help: 'Help Center',
     notification: 'Notifications',
     dict: 'System Dict',
+    logisticsList: 'Logistics Line',
   },
   assets: {
     balance: {

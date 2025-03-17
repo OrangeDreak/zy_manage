@@ -24,6 +24,7 @@ export default {
     help: '帮助中心',
     notification: '消息通知',
     dict: '字典管理',
+    logisticsList: '干线管理',
   },
   assets: {
     balance: {
