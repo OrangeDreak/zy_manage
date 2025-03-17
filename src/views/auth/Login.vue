@@ -123,7 +123,6 @@ const handleLogin = async () => {
       try {
         const res = await auth.login(loginForm.value)
         authStore.setToken(res.token)
-        authStore.setUserInfo(res.userInfo)
         ElMessage.success('登录成功')
         router.push('/')
       } catch (error) {
