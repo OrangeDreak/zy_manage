@@ -21,6 +21,12 @@ const routes = [
     meta: { title: '订单详情' }
   },
   {
+      path: '/dict',
+      name: 'Dict',
+      component: () => import('@/views/system/Dict.vue'),
+      meta: { title: '字典管理' }
+  },
+  {
     path: '/',
     component: () => import('@/layouts/MainLayout.vue'),
     redirect: '/transfer-list',

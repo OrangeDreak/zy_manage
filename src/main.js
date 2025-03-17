@@ -2,7 +2,7 @@ import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import ElementPlus from 'element-plus';
 import 'element-plus/dist/index.css';
-import Avue from '@smallwei/avue-next';
+import Avue from '@smallwei/avue';
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import 'element-plus/dist/index.css'
 import App from './App.vue'
@@ -10,13 +10,10 @@ import router from './router'
 import { createI18n } from 'vue-i18n'
 import en from './locales/en'
 import zh from './locales/zh'
-import basicContainer from "./components/basic-container/main";
 
 
 // 自定义 Element Plus 主题
 const app = createApp(App)
-
-app.component("basicContainer", basicContainer);
 
 // 配置 Element Plus
 app.use(ElementPlus, {

@@ -2,18 +2,14 @@ import request from '@/utils/request'
 
 export const getList = (current, size, params) => {
   return request({
-    url: "/tp/admin/dict/list",
+    url: "/admin/dict/list",
     method: "post",
-    params: {
-      ...params,
-      current,
-      size,
-    },
+    data: params,
   });
 };
 export const remove = (id) => {
   return request({
-    url: "/tp/admin/dict/remove?id=" + id,
+    url: "/admin/dict/remove?id=" + id,
     method: "post",
     params: {
       ids,
@@ -23,7 +19,7 @@ export const remove = (id) => {
 
 export const add = (row) => {
   return request({
-    url: "/tp/admin/dict/submit",
+    url: "/admin/dict/submit",
     method: "post",
     data: row,
   });
@@ -31,7 +27,7 @@ export const add = (row) => {
 
 export const update = (row) => {
   return request({
-    url: "/tp/admin/dict/submit",
+    url: "/admin/dict/submit",
     method: "post",
     data: row,
   });
@@ -39,7 +35,7 @@ export const update = (row) => {
 
 export const getDict = (id) => {
   return request({
-    url: "/tp/admin/dict/detail",
+    url: "/admin/dict/detail",
     method: "get",
     params: {
       id,
@@ -48,7 +44,7 @@ export const getDict = (id) => {
 };
 export const getDictTree = () => {
   return request({
-    url: "/tp/admin/dict/tree?code=DICT",
+    url: "/admin/dict/tree?code=DICT",
     method: "get",
   });
 };
