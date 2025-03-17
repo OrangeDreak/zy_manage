@@ -1,35 +1,104 @@
-import request from '@/utils/request'
+import request from "@/router/axios";
+import website from "@/config/website";
 
-export const user = {
-  // 获取用户列表
-  getUsers(params) {
-    return request({
-      url: '/api/users',
-      method: 'get',
-      params
-    })
-  },
+export const loginByUsername = (tenantId, account, password, type, key, code) =>
+  request({
+    url: "/blade-auth/token",
+    method: "post",
+    headers: {
+      "Captcha-Key": key,
+      "Captcha-Code": code,
+    },
+    params: {
+      grantType: website.captchaMode ? "captcha" : "password",
+      tenantId,
+      account,
+      password,
+      type,
+    },
+  });
 
-  createUser(data) {
-    return request({
-      url: '/api/users',
-      method: 'post',
-      data
-    })
-  },
+export const loginBySocial = (tenantId, source, code, state) =>
+  request({
+    url: "/blade-auth/token",
+    method: "post",
+    headers: {
+      "Tenant-Id": tenantId,
+    },
+    params: {
+      tenantId,
+      source,
+      code,
+      state,
+      grantType: "social",
+      scope: "all",
+    },
+  });
 
-  updateUser(id, data) {
-    return request({
-      url: `/api/users/${id}`,
-      method: 'put',
-      data
-    })
-  },
+export const getButtons = () =>
+  request({
+    url: "/blade-system/menu/buttons",
+    method: "get",
+  });
 
-  deleteUser(id) {
-    return request({
-      url: `/api/users/${id}`,
-      method: 'delete'
-    })
-  }
-} 
+export const getUserInfo = () =>
+  request({
+    url: "/user/getUserInfo",
+    method: "get",
+  });
+
+export const refreshToken = (refreshToken) =>
+  request({
+    url: "/blade-auth/token",
+    method: "post",
+    params: {
+      refreshToken,
+      grantType: "refresh_token",
+      scope: "all",
+    },
+  });
+
+export const registerGuest = (form, oauthId) =>
+  request({
+    url: "/blade-user/register-guest",
+    method: "post",
+    params: {
+      tenantId: form.tenantId,
+      name: form.name,
+      account: form.account,
+      password: form.password,
+      oauthId,
+    },
+  });
+
+export const getMenu = () =>
+  request({
+    url: "/blade-system/menu/routes",
+    method: "get",
+  });
+
+export const getCaptcha = () =>
+  request({
+    url: "/blade-auth/captcha",
+    method: "get",
+  });
+
+// getTopMenu暂时没用到，页面中使用到的地方先行注释
+export const getTopMenu = () =>
+  request({
+    url: "/user/getTopMenu",
+    method: "get",
+  });
+
+export const sendLogs = (list) =>
+  request({
+    url: "/user/send-logs",
+    method: "post",
+    data: list,
+  });
+
+export const logout = () =>
+  request({
+    url: "/blade-auth/logout",
+    method: "post",
+  });

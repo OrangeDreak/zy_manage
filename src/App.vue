@@ -1,19 +1,29 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <router-view />
+  <div id="app">
+    <router-view />
+  </div>
 </template>
 
-<style>
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-}
-
+<script>
+export default {
+  name: "app",
+  data() {
+    return {};
+  },
+  watch: {},
+  created() {
+  },
+  methods: {},
+  computed: {}
+};
+</script>
+<style lang="scss">
 #app {
+  width: 100%;
   height: 100%;
+  overflow: hidden;
+}
+.avue--detail .el-col{
+  margin-bottom: 0;
 }
 </style>
