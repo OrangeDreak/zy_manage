@@ -24,7 +24,7 @@
           <h2 class="login-title">登录</h2>
           
           <el-form ref="formRef" :model="loginForm" :rules="rules">
-            <el-form-item prop="username">
+            <el-form-item prop="loginName">
               <el-input 
                 v-model="loginForm.loginName"
                 placeholder="电子邮箱"
