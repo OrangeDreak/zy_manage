@@ -99,8 +99,8 @@
              <span>{{ $t('menu.dict') }}</span>
           </el-menu-item>
           <el-menu-item index="/logisticsList">
-            <el-icon><Notebook /></el-icon>
-            <span>{{ $t('menu.dict') }}</span>
+            <el-icon><SetUp /></el-icon>
+            <span>{{ $t('menu.logisticsList') }}</span>
           </el-menu-item>
         </el-menu>
       </el-aside>
