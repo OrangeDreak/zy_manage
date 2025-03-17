@@ -15,8 +15,8 @@
         <div class="slogan">
           <div class="slogan-text">管理后台</div>
           </div>
-        </div>
       </div>
+
 
       <!-- 右侧登录表单 -->
       <div class="login-right">
