@@ -17,7 +17,7 @@
       @size-change="sizeChange"
       @on-load="onLoad"
     >
-      <template slot-scope="scope" slot="menu">
+      <template slot-scope="scope" slot="menuLeft">
         <el-button
           type="text"
           icon="el-icon-circle-plus-outline"
