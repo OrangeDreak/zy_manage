@@ -234,27 +234,28 @@
           placeholder="请输入最大申报金额"
         ></el-input-number>
       </template>
-      <template slot-scope="{ row }" slot="menu">
+      <template slot-scope="scope" slot="menu">
         <!-- 状态 0:已停用，1:已启用 -->
+        console.log(scope.row);
         <el-button
           type="text"
           icon="el-icon-refresh"
           size="small"
-          @click.stop="toUpdateStatus(row)"
-          >{{ row.logisticsLineStatus ? "停用" : "启用" }}</el-button
+          @click.stop="toUpdateStatus(scope.row)"
+          >{{ scope.row.logisticsLineStatus ? "停用" : "启用" }}</el-button
         >
         <el-button
           type="text"
           icon="el-icon-collection-tag"
           size="small"
-          @click.stop="bindLine(row)"
-          >{{ row.outLineId ? "编辑" : "绑定" }}外部干线</el-button
+          @click.stop="bindLine(scope.row)"
+          >{{ scope.row.outLineId ? "编辑" : "绑定" }}外部干线</el-button
         >
         <el-button
           type="text"
           icon="el-icon-edit-outline"
           size="small"
-          @click.stop="toSetCost(row.logisticsLineId)"
+          @click.stop="toSetCost(scope.row.logisticsLineId)"
           >费用设置</el-button
         >
         <el-button
@@ -264,7 +265,7 @@
           size="small"
           @click.stop="
             showPop = true;
-            logisticsLineId = row.logisticsLineId;
+            logisticsLineId = scope.row.logisticsLineId;
           "
           >运费测算</el-button
         >
@@ -293,6 +294,10 @@ import {
 } from "@/api/logistics";
 import FreightCalculation from "@/components/pops/logistics/FreightCalculation.vue";
 import BindLineDialog from "./components/bindLineDialog.vue";
+import '@smallwei/avue/lib/index.css';
+import "@/styles/flex.scss";
+import "@/styles/commonStyle.scss";
+
 
 export default {
   name: "LogisticsList",
@@ -307,6 +312,13 @@ export default {
       option: {
         // viewBtn: true,
         // menuWidth: 180,
+        searchShow: true,
+        tip: false,
+        tree: true,
+        border: true,
+        selection: false,
+        viewBtn: true,
+        menuWidth: 300,
         searchMenuSpan: 8,
         labelWidth: 190,
         span: 24,
@@ -728,17 +740,18 @@ export default {
     "warehouseList.length": {
       handler() {
         this.findObject(this.option.column, "warehouseId").dicData = this.warehouseList;
-        // console.log(this.warehouseList);
+         //console.log(222);
+        //console.log(this.warehouseList);
       },
       deep: true,
       immediate: true,
     },
     "productTypeList.length": {
       handler() {
-        this.findObject(this.option.column, "nonsupportProductTypeList").dicData =
-          this.productTypeList;
+        this.findObject(this.option.column, "nonsupportProductTypeList").dicData = this.productTypeList;
         // this.findObject(this.option.column, "logisticsLineType").dicData = this.productTypeList;
-        // console.log(this.productTypeList);
+        //console.log(111);
+        //console.log(this.productTypeList);
       },
       deep: true,
       immediate: true,

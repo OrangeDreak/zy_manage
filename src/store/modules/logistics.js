@@ -27,9 +27,8 @@ const logistics = {
     async getAreaList({ commit }) {
       try {
         const { data = {} } = await getAreaLibrary();
-        if (!data.success) return;
-        if (data.data) {
-          let _entry = data.data;
+        if (data) {
+          let _entry = data;
           _entry.forEach((item) => {
             if (!(item.children && item.children.length)) {
               delete item.children;
@@ -51,9 +50,8 @@ const logistics = {
     async getRegionList({ commit }) {
       try {
         const { data = {} } = await getRegion();
-        if (!data.success) return;
-        if (data.data) {
-          let _entry = data.data;
+        if (data) {
+          let _entry = data;
           _entry.forEach((item) => {
             if (!(item.children && item.children.length)) {
               delete item.children;
@@ -81,9 +79,8 @@ const logistics = {
     async getWarehouseList({ commit }) {
       try {
         const { data = {} } =await getWarehouseList({size:200,current:1});
-        if (!data.success) return;
-        if (data.data && data.data.records) {
-          let _entry = data.data.records;
+        if (data) {
+          let _entry = data;
           commit('setWarehouseList', _entry.map(({ id: value, name: label }) => ({
             label,
             value,
@@ -97,20 +94,22 @@ const logistics = {
     async getProductTypeList({ commit }) {
       try {
         const { data = {} } = await getProductTypeLabel();
-        if (!data.success) return;
-        if (data.data) {
-          let _entry = data.data;
+        if (data) {
+          let _entry = data;
           _entry.forEach((item) => {
+          item.value = item.labelId;
             if (!(item.children && item.children.length)) {
               delete item.children;
             } else {
               item.children.forEach((children) => {
+              children.value = children.labelId;
                 if (!(children.children && children.children.length)) {
                   delete children.children;
                 }
               })
             }
           })
+          console.log(_entry);
           commit('setProductTypeList', _entry);
         }
       } catch (error) {
