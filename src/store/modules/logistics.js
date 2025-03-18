@@ -109,7 +109,7 @@ const logistics = {
               })
             }
           })
-          console.log(_entry);
+
           commit('setProductTypeList', _entry);
         }
       } catch (error) {

@@ -18,7 +18,7 @@
       @refresh-change="refreshChange"
       @on-load="onLoad"
     >
-      <template slot-scope="{ size }" slot="search">
+      <template #search="{ size }" slot="search">
         <el-form :model="search" :size="size" label-width="120px">
           <el-form-item label="覆盖区域:" :key="1">
             <el-cascader
@@ -28,6 +28,7 @@
               :props="{ multiple: true, value: 'id', label: 'areaName' }"
               filterable
               clearable
+              style="width:100%"
             />
           </el-form-item>
         </el-form>
@@ -234,9 +235,8 @@
           placeholder="请输入最大申报金额"
         ></el-input-number>
       </template>
-      <template slot-scope="scope" slot="menu">
+      <template #menu="scope, index">
         <!-- 状态 0:已停用，1:已启用 -->
-        console.log(scope.row);
         <el-button
           type="text"
           icon="el-icon-refresh"
@@ -259,7 +259,7 @@
           >费用设置</el-button
         >
         <el-button
-          v-if="row.areaLibraryNameListDesc"
+          v-if="scope.row.areaLibraryNameListDesc"
           type="text"
           icon="el-icon-truck"
           size="small"
@@ -565,7 +565,6 @@ export default {
             type: "checkbox",
             dicData: [{ label: "", value: 1 }],
             control: (val, form) => {
-              console.log(val);
               if (val.length) {
                 return {
                   isPrepaidTax: {
@@ -822,7 +821,7 @@ export default {
       getList(param).then((res) => {
         if (res && res.data) {
           const data = res.data;
-          this.page.total = Number(res.total || 0);
+          this.page.total = res.total;
           this.data = (data || []).map((item) => this.handleData(item));
           this.loading = false;
         }
@@ -998,12 +997,8 @@ export default {
             logisticsLineStatus: logisticsLineStatus === 1 ? 0 : 1,
           };
           const { data = {} } = await updateStatus(param);
-          if (data.success) {
-            this.onLoad(this.page);
-            this.$message.success("操作成功!");
-          } else {
-            this.$message.error(data.msg || "操作失败");
-          }
+          this.onLoad(this.page);
+          this.$message.success("操作成功!");
         })
         .catch(() => {});
     },
@@ -1034,9 +1029,6 @@ export default {
 </script>
 
 <style scoped="scoped" lang="scss">
-@import "@/styles/flex.scss";
-@import "@/styles/commonStyle.scss";
-@import '@smallwei/avue/lib/index.css';
 
 .package-limit {
   display: flex;

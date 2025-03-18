@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="basic-container">
     <avue-crud
       :option="option"
       :table-loading="loading"
@@ -7,6 +7,7 @@
       ref="crud"
       v-model="form"
       :before-open="beforeOpen"
+      :before-close="beforeClose"
       @row-del="rowDel"
       @row-update="rowUpdate"
       @row-save="rowSave"
@@ -17,12 +18,12 @@
       @size-change="sizeChange"
       @on-load="onLoad"
     >
-      <template slot-scope="scope" slot="menuLeft">
+      <template #menu="data, index">
         <el-button
           type="text"
           icon="el-icon-circle-plus-outline"
           size="small"
-          @click.stop="handleAdd(scope.row, scope.index)"
+          @click.stop="handleAdd(data.row)"
           >新增子项
         </el-button>
       </template>
@@ -32,7 +33,6 @@
 
 <script>
 import { add, getDict, getDictTree, getList, remove, update } from "@/api/dict";
-import basicContainer from '@/components/basic-container/main.vue'
 import '@smallwei/avue/lib/index.css'
 
 export default {
@@ -147,8 +147,6 @@ export default {
   },
   methods: {
     handleAdd(row) {
-      this.$refs.crud.value.code = row.code;
-      this.$refs.crud.value.parentId = row.id;
       this.$refs.crud.option.column.filter((item) => {
         if (item.prop === "code") {
           item.value = row.code;
@@ -230,6 +228,19 @@ export default {
         });
       }
       done();
+    },
+    beforeClose(done, type) {
+       this.$refs.crud.option.column.filter((item) => {
+               if (item.prop === "code") {
+                 item.value = '';
+                 item.addDisabled = false;
+               }
+               if (item.prop === "parentId") {
+                 item.value = '';
+                 item.addDisabled = false;
+               }
+             });
+       done();
     },
     currentChange(currentPage) {
       this.page.currentPage = currentPage;

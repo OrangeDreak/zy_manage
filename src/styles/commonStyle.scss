@@ -212,3 +212,16 @@
   float: right;
   margin: 24px 0;
 }
+.basic-container {
+  padding: 100px 100px 50px;
+  padding-top: 10px;
+  padding-right: 10px;
+  border-radius: 10px;
+  box-sizing: border-box;
+  .el-card {
+    width: 100%;
+  }
+  &:first-child {
+    padding-top: 10px;
+  }
+}
