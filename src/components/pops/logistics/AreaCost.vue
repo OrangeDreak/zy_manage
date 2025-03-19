@@ -37,9 +37,9 @@
       >
 
       <el-table :data="form.weightCostList" style="width: 100%">
-        <el-table-column label="重量范围(g)" prop="weightScope" width="100">
-          <template slot-scope="{ row }">
-            <div>{{ row.weightMin }} ~ {{ row.weightMax }}</div>
+        <el-table-column label="重量范围(g)"  width="100">
+          <template #default="scope">
+            <div>{{ scope.row.weightMin }} ~ {{ scope.row.weightMax }}</div>
           </template>
         </el-table-column>
         <el-table-column label="开始重量(g)" prop="weightMin" width="100" />
@@ -57,7 +57,7 @@
         <el-table-column label="操作费(￥)" prop="operationFee" width="100" />
         <el-table-column label="服务费(￥)" prop="servicePrice" width="100" />
         <el-table-column label="操作" fixed="right" width="100" align="center">
-          <template slot-scope="scope">
+          <template #default="scope">
             <el-button type="text" size="small" @click="toEditWeightCost(scope.row, scope.$index)"
               >编辑</el-button
             >
@@ -72,12 +72,14 @@
         </el-table-column>
       </el-table>
 
-      <span slot="footer">
+      <template #footer class="dialog-footer">
+      <div class="dialog-footer">
         <el-button size="small" @click="closePop">取消</el-button>
         <el-button :disabled="loading" type="primary" size="small" @click="onSubmit"
           >确定</el-button
         >
-      </span>
+      </div>
+      </template>
     </el-dialog>
     <WeightCost
       v-if="showWeightCostPop"
@@ -153,7 +155,7 @@ export default {
     ...mapActions(["getAreaList"]),
     // 关闭弹窗
     closePop() {
-      this.$emit("close");
+      this.$emit("closeAreaCostPop");
     },
     closeWeightCostPop() {
       this.showWeightCostPop=false;
@@ -216,7 +218,6 @@ export default {
     },
     // 新增/编辑 【重量范围】
     toEditWeightCost(val, index) {
-      this.showWeightCostPop = true;
       this.weightCostInfo = val || {};
       this.weightCostIndex = index;
 
@@ -237,14 +238,15 @@ export default {
           this.weightMax = null;
         }
       }
+      this.showWeightCostPop = true;
     },
     // 保存【重量范围】编辑
     submitWeightCost(val) {
-     console.log(4);
+      console.log(2);
       const { weightCostIndex } = this;
       const { weightCostList } = this.form;
       if (typeof weightCostIndex === "number") {
-        this.$set(this.form.weightCostList, weightCostIndex, val);
+        this.form.weightCostList[weightCostIndex] = val;
       } else {
         if (weightCostList && weightCostList.length) {
           this.form.weightCostList.push(val);

@@ -200,7 +200,7 @@
           clearable
         />
       </template>
-      <template slot="logisticsTimeForm" slot-scope="{ type }">
+      <template slot="logisticsTimeForm" #logisticsTime-form="{ type }">
         <el-input
           :disabled="type === 'view' || loading"
           v-model="form.logisticsTimeMin"

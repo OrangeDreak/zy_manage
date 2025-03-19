@@ -35,12 +35,12 @@
     <el-table :data="logisticsInfo.logisticsLineCostList" style="width: 100%">
       <el-table-column label="国家/地区" prop="areaLibraryName" />
       <el-table-column label="重量范围(g)" prop="weightScope">
-        <template slot-scope="{ row }">
-          <div>{{ row.weightMin }} ~ {{ row.weightMax }}</div>
+        <template #default="scope">
+          <div>{{ scope.row.weightMin }} ~ {{ scope.row.weightMax }}</div>
         </template>
       </el-table-column>
       <el-table-column label="首重重量(g)" prop="firstWeight">
-        <template slot-scope="scope">
+        <template #default="scope">
           <el-input
             v-if="editKey === 'firstWeight' + scope.$index"
             v-model="scope.row.firstWeight"
@@ -52,7 +52,7 @@
         </template>
       </el-table-column>
       <el-table-column label="首重费用(￥)" prop="firstWeightPrice">
-        <template slot-scope="scope">
+        <template #default="scope">
           <el-input
             v-if="editKey === 'firstWeightPrice' + scope.$index"
             v-model="scope.row.firstWeightPrice"
@@ -64,7 +64,7 @@
         </template>
       </el-table-column>
       <el-table-column label="续重重量(g)" prop="additionalWeight">
-        <template slot-scope="scope">
+        <template #default="scope">
           <el-input
             v-if="editKey === 'additionalWeight' + scope.$index"
             v-model="scope.row.additionalWeight"
@@ -76,7 +76,7 @@
         </template>
       </el-table-column>
       <el-table-column label="续重费用(￥)" prop="additionalWeightPrice">
-        <template slot-scope="scope">
+        <template #default="scope">
           <el-input
             v-if="editKey === 'additionalWeightPrice' + scope.$index"
             v-model="scope.row.additionalWeightPrice"
@@ -88,7 +88,7 @@
         </template>
       </el-table-column>
       <el-table-column label="物流商处理费(￥)" prop="logisticsProviderProcessingFee" width="140">
-        <template slot-scope="scope">
+        <template #default="scope">
           <el-input
             v-if="editKey === 'logisticsProviderProcessingFee' + scope.$index"
             v-model="scope.row.logisticsProviderProcessingFee"
@@ -100,7 +100,7 @@
         </template>
       </el-table-column>
       <el-table-column label="燃油费(￥)" prop="fuelCost">
-        <template slot-scope="scope">
+        <template #default="scope">
           <el-input
             v-if="editKey === 'fuelCost' + scope.$index"
             v-model="scope.row.fuelCost"
@@ -112,7 +112,7 @@
         </template>
       </el-table-column>
       <el-table-column label="操作费(￥)" prop="operationFee">
-        <template slot-scope="scope">
+        <template #default="scope">
           <el-input
             v-if="editKey === 'operationFee' + scope.$index"
             v-model="scope.row.operationFee"
@@ -124,7 +124,7 @@
         </template>
       </el-table-column>
       <el-table-column label="服务费(￥)" prop="servicePrice">
-        <template slot-scope="scope">
+        <template #default="scope">
           <el-input
             v-if="editKey === 'servicePrice' + scope.$index"
             v-model="scope.row.servicePrice"
@@ -136,7 +136,7 @@
         </template>
       </el-table-column>
       <el-table-column label="操作" fixed="right" align="center">
-        <template slot-scope="scope">
+        <template #default="scope">
           <el-button type="text" size="small" @click="toEditAreaCost(scope.row, scope.$index)"
             >编辑</el-button
           >
@@ -160,7 +160,7 @@
       :showPop="showAreaCostPop"
       :areaCostInfo="areaCostInfo"
       @submitAreaCost="submitAreaCost"
-      @close="closeAreaCostPop"
+      @closeAreaCostPop="closeAreaCostPop"
     />
   </div>
 </template>
@@ -291,22 +291,29 @@ export default {
           _list.push({ ...weightCostItme, areaLibraryName, areaLibraryIdList }),
         );
       }
-      console.log(_list);
+      console.log(1);
 
       if (typeof areaCostIndex === "number") {
+        console.log(2);
         const arr2 = logisticsLineCostList.slice(areaCostIndex + 1);
         if (areaCostIndex === 0) {
+          console.log(7);
           this.logisticsInfo.logisticsLineCostList = _list.concat(arr2);
         } else {
+          console.log(8);
           const arr1 = logisticsLineCostList.slice(0, areaCostIndex);
           this.logisticsInfo.logisticsLineCostList = arr1.concat(_list, arr2);
         }
       } else {
+        console.log(3);
         if (logisticsLineCostList && logisticsLineCostList.length) {
+          console.log(4);
           this.logisticsInfo.logisticsLineCostList = logisticsLineCostList.concat(_list);
         } else {
+          console.log(5);
           this.logisticsInfo.logisticsLineCostList = Object.freeze(_list);
         }
+        console.log(6);
       }
     },
     // 保存
@@ -341,12 +348,8 @@ export default {
       try {
         const { data = {} } = await saveLogisticsCost(param);
         this.subLoading = false;
-        if (data.success) {
-          this.$message.success("保存成功!");
-          this.$router.push("/logistics/logisticsList");
-        } else {
-          this.$message.error(data.msg || "操作失败");
-        }
+        this.$message.success("保存成功!");
+        this.$router.push("/logisticsList");
       } catch (e) {
         this.subLoading = false;
       }
