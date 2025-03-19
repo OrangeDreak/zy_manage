@@ -1,7 +1,7 @@
 <template>
   <el-dialog
-    width="500px"
-    :visible.sync="visible"
+    width="50%"
+    v-model="visible"
     :close-on-click-modal="false"
     :title="title"
     @close="close"
@@ -40,15 +40,20 @@
         </el-select>
       </el-form-item> -->
     </el-form>
-    <span slot="footer" class="dialog-footer">
+    <template #footer class="dialog-footer">
+    <div class="dialog-footer">
       <el-button @click="visible = false">取 消</el-button>
       <el-button type="primary" :loading="loading" @click="handleOk">确 定</el-button>
-    </span>
+    </div>
+    </template>
   </el-dialog>
 </template>
 
 <script>
 import { bindOutLine } from "@/api/logistics";
+import 'element-plus/dist/index.css';
+import "@/styles/flex.scss";
+import "@/styles/commonStyle.scss";
 export default {
   data() {
     return {

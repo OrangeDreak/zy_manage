@@ -2,7 +2,7 @@
   <div>
     <el-dialog
       title="编辑国家/地区"
-      :visible.sync="showPop"
+      model-value="showPop"
       :close-on-click-modal="false"
       width="70%"
       :before-close="closePop"
@@ -86,6 +86,7 @@
       :weightMin="weightMin"
       :weightMax="weightMax"
       @submitWeightCost="submitWeightCost"
+      @close="closeWeightCostPop"
     />
   </div>
 </template>
@@ -95,6 +96,9 @@ import { mapActions, mapState } from "vuex";
 import cloneDeep from "lodash-es/cloneDeep";
 import { calculatePriceTypeMap } from "@/config/commonConfig.js";
 import WeightCost from "@/components/pops/logistics/WeightCost.vue";
+import "@/styles/flex.scss";
+import "@/styles/commonStyle.scss";
+
 
 export default {
   components: { WeightCost },
@@ -128,6 +132,7 @@ export default {
       weightCostIndex: null,
       weightMin: null,
       weightMax: null,
+      isShow: false,
     };
   },
   computed: {
@@ -148,7 +153,10 @@ export default {
     ...mapActions(["getAreaList"]),
     // 关闭弹窗
     closePop() {
-      this.$emit("update:showPop", false);
+      this.$emit("close");
+    },
+    closeWeightCostPop() {
+      this.showWeightCostPop=false;
     },
     onSubmit() {
       this.$refs.form.validate(async (valid) => {
@@ -232,6 +240,7 @@ export default {
     },
     // 保存【重量范围】编辑
     submitWeightCost(val) {
+     console.log(4);
       const { weightCostIndex } = this;
       const { weightCostList } = this.form;
       if (typeof weightCostIndex === "number") {
@@ -250,6 +259,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "@/styles/flex.scss";
-@import "@/styles/commonStyle.scss";
 </style>

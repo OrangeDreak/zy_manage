@@ -119,13 +119,9 @@ export const convertYuanToFen = (val) => {
 
 //  获取路由对应键的值
 export const getUrlParamJs = (paramName) => {
-  const hash = window.location.hash.substring(1); // 去除 '#' 符号
-  const queryIndex = hash.indexOf("?");
-
-  if (queryIndex !== -1 && queryIndex < hash.length - 1) {
-    const queryString = hash.substring(queryIndex + 1);
+  const queryString = window.location.search;
+  if (queryString) {
     const params = new URLSearchParams(queryString);
-
     return params.get(paramName);
   }
 

@@ -2,7 +2,7 @@
   <el-dialog
     title="编辑重量范围"
     :close-on-click-modal="false"
-    :visible.sync="showPop"
+    model-value="showPop"
     width="50%"
     :before-close="closePop"
   >
@@ -189,7 +189,7 @@ export default {
     },
     // 关闭弹窗
     closePop() {
-      this.$emit("update:showPop", false);
+      this.$emit("close");
     },
     onSubmit() {
       this.$refs.form.validate(async (valid) => {

@@ -98,11 +98,13 @@ const logistics = {
           let _entry = data;
           _entry.forEach((item) => {
           item.value = item.labelId;
+          item.label = item.labelName;
             if (!(item.children && item.children.length)) {
               delete item.children;
             } else {
               item.children.forEach((children) => {
               children.value = children.labelId;
+              children.label = children.labelName;
                 if (!(children.children && children.children.length)) {
                   delete children.children;
                 }

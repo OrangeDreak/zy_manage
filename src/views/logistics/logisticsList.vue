@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="basic-container">
     <avue-crud
       :option="option"
       :table-loading="loading"
@@ -185,7 +185,7 @@
           v-model="form.logisticsLineType"
           placeholder="请选择"
           :options="productTypeList"
-          :props="{ multiple: true, value: 'labelId', label: 'labelName' }"
+          :props="{ multiple: true, value: 'labelId', label: 'labelId' }"
           filterable
           clearable
         />
@@ -196,7 +196,6 @@
           v-model="form.nonsupportProductTypeList"
           placeholder="请选择"
           :options="productTypeList"
-          :props="{ multiple: true, value: 'labelId', label: 'labelName' }"
           filterable
           clearable
         />
@@ -298,12 +297,12 @@ import '@smallwei/avue/lib/index.css';
 import "@/styles/flex.scss";
 import "@/styles/commonStyle.scss";
 
-
 export default {
   name: "LogisticsList",
   components: { FreightCalculation, BindLineDialog },
   data() {
     return {
+      baseURL: import.meta.env.VITE_API_BASE_URL,
       form: {},
       query: {},
       search: {},
@@ -378,7 +377,7 @@ export default {
             type: "upload",
             accept: ".png,.jpg,.jpeg",
             listType: "picture-img",
-            action: "/resource/oss/upload",
+            action: "http://192.168.0.101:8081/tp/admin/resource/oss/upload",
             tip: "支持jpg、png格式，建议尺寸：px，不超过2M",
             propsHttp: { url: "url", res: "data" },
             uploadBefore: (file, done, loading) => {
@@ -430,8 +429,10 @@ export default {
             label: "不支持包裹类型",
             prop: "nonsupportProductTypeList",
             width: 120,
+            type: "cascader",
             overHidden: true,
-            type: "tree",
+            multiple: true,
+            emitPath: true,
             rules: [
               {
                 required: true,
@@ -440,7 +441,6 @@ export default {
               },
             ],
             dicData: [],
-            html: true,
             formatter: (val) => {
               return val.nonsupportProductTypeListDesc;
             },
@@ -1022,7 +1022,7 @@ export default {
       this.$refs.refBindLineDialog.show({ title, ...item });
     },
     toSetCost(id) {
-      this.$router.push(`/logisticsCost/index?id=${id}`);
+      this.$router.push(`/logisticsCost?id=${id}`);
     },
   },
 };

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="basic-container">
     <el-form
       ref="form"
       :model="logisticsInfo"
@@ -157,23 +157,27 @@
     </div>
     <AreaCost
       v-if="showAreaCostPop"
-      :showPop.sync="showAreaCostPop"
+      :showPop="showAreaCostPop"
       :areaCostInfo="areaCostInfo"
       @submitAreaCost="submitAreaCost"
+      @close="closeAreaCostPop"
     />
   </div>
 </template>
 
 <script>
 import cloneDeep from "lodash-es/cloneDeep";
-import { getUrlParamJs, convertFenToYuan, convertYuanToFen } from "@/util/commonUtil.js";
+import { getUrlParamJs, convertFenToYuan, convertYuanToFen } from "@/utils/commonUtil.js";
 import { calculatePriceTypeMap } from "@/config/commonConfig.js";
 import {
   getLogisticsCost,
   saveLogisticsCost,
   delLogisticsCostItem,
-} from "@/api/logistics/logistics";
+} from "@/api/logistics";
 import AreaCost from "@/components/pops/logistics/AreaCost.vue";
+import '@smallwei/avue/lib/index.css';
+import "@/styles/flex.scss";
+import "@/styles/commonStyle.scss";
 
 export default {
   components: { AreaCost },
@@ -199,13 +203,16 @@ export default {
     this.getDetail();
   },
   methods: {
+    closeAreaCostPop() {
+       this.showAreaCostPop = false;
+    },
     async getDetail() {
       this.loading = true;
       const { data = {} } = await getLogisticsCost({
         logisticsLineId: this.logisticsLineId,
       });
       this.loading = false;
-      this.logisticsInfo = data.data || {};
+      this.logisticsInfo = data || {};
       this.logisticsInfo.calculatePriceType = 1;
       const { logisticsLineCostList } = this.logisticsInfo;
       logisticsLineCostList &&
@@ -349,9 +356,6 @@ export default {
 </script>
 
 <style scoped="scoped" lang="scss">
-@import "@/styles/flex.scss";
-@import "@/styles/commonStyle.scss";
-@import '@smallwei/avue/lib/index.css';
 .btns {
   display: flex;
   justify-content: space-between;
