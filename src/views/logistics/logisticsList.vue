@@ -33,7 +33,7 @@
           </el-form-item>
         </el-form>
       </template>
-      <template slot="outLineIdForm">
+      <template #outLineId-form>
         <el-select
           placeholder="请选择 外部物流干线"
           v-model="form.outLineId"
@@ -48,7 +48,7 @@
         </el-select>
         <span>线路code：{{ outLineInfo.code || "--" }}</span>
       </template>
-      <template slot="packageLimitForm">
+      <template #packageLimit-form>
         <div class="package-limit">
           <div class="label">最低限制</div>
           <el-input-number
@@ -88,7 +88,7 @@
         </div>
         <!-- </el-form-item> -->
       </template>
-      <template slot="volumeLimitForm">
+      <template #volumeLimit-form>
         <div class="package-limit package-limit2">
           <div class="label">第一长边最大限制&nbsp;</div>
           <el-input-number
@@ -155,7 +155,7 @@
         ></el-input-number>
         USD
       </template> -->
-      <template slot="cargoValueRatioForm" slot-scope="{ type }">
+      <template slot="cargoValueRatioForm" #cargoValueRatio-form="{ type }">
         <el-input-number
           v-model="form.cargoValueRatio"
           :min="0"
@@ -167,7 +167,7 @@
           data-unit="%"
         ></el-input-number>
       </template>
-      <template slot="taxReportingRatioForm" slot-scope="{ type }">
+      <template slot="taxReportingRatioForm" #taxReportingRatio-form="{ type }">
         <el-input-number
           v-model="form.taxReportingRatio"
           :min="0"
@@ -190,7 +190,7 @@
           clearable
         />
       </template> -->
-      <template slot="nonsupportProductTypeListForm" slot-scope="{ type }">
+      <template slot="nonsupportProductTypeListForm" #nonsupportProductTypeList-form="{ type }">
         <el-cascader
           :disabled="type === 'view' || loading"
           v-model="form.nonsupportProductTypeList"
@@ -215,7 +215,7 @@
           ><template slot="append">天</template></el-input
         >
       </template>
-      <template slot="declarationAmountLimitForm" slot-scope="{ type }">
+      <template slot="declarationAmountLimitForm" #declarationAmountLimit-form="{ type }">
         <el-input-number
           v-model="form.declarationAmountMinLimit"
           :precision="2"

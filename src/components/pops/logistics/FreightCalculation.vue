@@ -2,7 +2,7 @@
   <el-dialog
     title="运费测算"
     :close-on-click-modal="false"
-    :visible.sync="showPop"
+    model-value="showPop"
     width="50%"
     :before-close="closePop"
   >
@@ -64,6 +64,8 @@
 import cloneDeep from "lodash-es/cloneDeep";
 import { convertFenToYuan } from "@/utils/commonUtil.js";
 import { calculate, getListArea } from "@/api/logistics";
+import "@/styles/flex.scss";
+import "@/styles/commonStyle.scss";
 
 export default {
   components: {},
@@ -171,6 +173,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "@/styles/flex.scss";
-@import "@/styles/commonStyle.scss";
 </style>

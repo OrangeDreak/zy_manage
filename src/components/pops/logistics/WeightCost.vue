@@ -76,15 +76,19 @@
         >
       </el-form-item>
     </el-form>
-    <span slot="footer">
+    <template #footer class="dialog-footer">
+    <div class="dialog-footer">
       <el-button size="small" @click="closePop">取消</el-button>
       <el-button :disabled="loading" type="primary" size="small" @click="onSubmit">确定</el-button>
-    </span>
+    </div>
+    </template>
   </el-dialog>
 </template>
 
 <script>
 import cloneDeep from "lodash-es/cloneDeep";
+import "@/styles/flex.scss";
+import "@/styles/commonStyle.scss";
 
 export default {
   components: {},
@@ -205,6 +209,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "@/styles/flex.scss";
-@import "@/styles/commonStyle.scss";
 </style>
