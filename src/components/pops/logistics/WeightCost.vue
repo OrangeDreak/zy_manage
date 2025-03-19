@@ -78,8 +78,8 @@
     </el-form>
     <template #footer class="dialog-footer">
     <div class="dialog-footer">
-      <el-button size="small" @click="closePop">取消</el-button>
-      <el-button :disabled="loading" type="primary" size="small" @click="onSubmit">确定</el-button>
+      <el-button  @click="closePop">取消</el-button>
+      <el-button :disabled="loading" type="primary"  @click="onSubmit">确定</el-button>
     </div>
     </template>
   </el-dialog>
@@ -89,6 +89,7 @@
 import cloneDeep from "lodash-es/cloneDeep";
 import "@/styles/flex.scss";
 import "@/styles/commonStyle.scss";
+import 'element-plus/dist/index.css';
 
 export default {
   components: {},

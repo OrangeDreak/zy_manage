@@ -12,7 +12,6 @@
       :model="form"
       :rules="rules"
       label-width="100px"
-      size="small"
       :disabled="loading"
     >
       <el-form-item label="国家/地区" prop="areaLibraryIdList">
@@ -46,17 +45,19 @@
         </el-input>
       </el-form-item>
       <el-form-item label=" ">
-        <el-button size="small" @click="onClean">一键重置</el-button>
+        <el-button  @click="onClean">一键重置</el-button>
       </el-form-item>
     </el-form>
     <div class="fs12">运费计算规则：运费=首重费用+（包裹重量-首重）/ 续重单位重量*单价+服务费</div>
     <div v-if="freightPrice" class="fs18 fw6 mt20">测算结果：{{ freightPrice }}</div>
-    <span slot="footer">
-      <el-button size="small" @click="closePop">取消</el-button>
-      <el-button :disabled="loading" type="primary" size="small" @click="onSubmit">{{
+    <template #footer class="dialog-footer">
+    <div class="dialog-footer">
+      <el-button  @click="closePop">取消</el-button>
+      <el-button :disabled="loading" type="primary"  @click="onSubmit">{{
         freightPrice ? "重新测算" : "开始测算"
       }}</el-button>
-    </span>
+    </div>
+    </template>
   </el-dialog>
 </template>
 
@@ -66,6 +67,7 @@ import { convertFenToYuan } from "@/utils/commonUtil.js";
 import { calculate, getListArea } from "@/api/logistics";
 import "@/styles/flex.scss";
 import "@/styles/commonStyle.scss";
+import 'element-plus/dist/index.css';
 
 export default {
   components: {},
@@ -106,22 +108,19 @@ export default {
       const { logisticsLineId } = this;
       try {
         const { data = {} } = await getListArea({ logisticsLineId });
-        if (!data.success) return;
-        if (data.data) {
-          let _entry = data.data;
-          _entry.forEach((item) => {
+        let _entry = data;
+        _entry.forEach((item) => {
             if (!(item.children && item.children.length)) {
-              delete item.children;
+               delete item.children;
             } else {
-              item.children.forEach((children) => {
-                if (!(children.children && children.children.length)) {
-                  delete children.children;
-                }
-              });
+               item.children.forEach((children) => {
+                  if (!(children.children && children.children.length)) {
+                     delete children.children;
+                  }
+               });
             }
-          });
-          this.areaList = _entry || [];
-        }
+        });
+        this.areaList = _entry || [];
       } catch (error) {
         console.log(error);
       }
@@ -132,7 +131,7 @@ export default {
     },
     // 关闭弹窗
     closePop() {
-      this.$emit("update:showPop", false);
+      this.$emit("close");
     },
     onSubmit() {
       // this.handleData();
@@ -143,13 +142,8 @@ export default {
           try {
             const { data = {} } = await calculate(param);
             this.loading = false;
-            if (data.success && data.data) {
-              const { freightPrice } = data.data;
-              this.freightPrice = convertFenToYuan(freightPrice, { sign: "￥" });
-            } else {
-              this.freightPrice = null;
-              this.$message.error(data.msg || "网络异常，请稍后再试");
-            }
+            const { freightPrice } = data;
+            this.freightPrice = convertFenToYuan(freightPrice, { sign: "￥" });
           } catch {
             this.loading = false;
           }

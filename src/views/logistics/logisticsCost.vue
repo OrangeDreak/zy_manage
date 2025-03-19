@@ -25,10 +25,10 @@
       </el-form-item>
     </el-form>
     <div class="btns">
-      <el-button type="primary" icon="el-icon-plus" size="small" @click="toEditAreaCost()"
+      <el-button type="primary" icon="el-icon-plus"  @click="toEditAreaCost()"
         >添加国家/地区</el-button
       >
-      <el-button size="small" :loading="subLoading" type="primary" @click="onSubmit"
+      <el-button :loading="subLoading" type="primary" @click="onSubmit"
         >保存</el-button
       >
     </div>
@@ -137,10 +137,10 @@
       </el-table-column>
       <el-table-column label="操作" fixed="right" align="center">
         <template #default="scope">
-          <el-button type="text" size="small" @click="toEditAreaCost(scope.row, scope.$index)"
+          <el-button type="text"  @click="toEditAreaCost(scope.row, scope.$index)"
             >编辑</el-button
           >
-          <el-button type="text" size="small" @click="toDelete(scope.$index, scope.row)"
+          <el-button type="text"  @click="toDelete(scope.$index, scope.row)"
             >删除</el-button
           >
         </template>
@@ -151,7 +151,7 @@
       v-if="logisticsInfo.logisticsLineCostList && logisticsInfo.logisticsLineCostList.length > 10"
       class="pagination"
     >
-      <el-button size="small" :loading="subLoading" type="primary" @click="onSubmit"
+      <el-button  :loading="subLoading" type="primary" @click="onSubmit"
         >保存</el-button
       >
     </div>
@@ -178,6 +178,7 @@ import AreaCost from "@/components/pops/logistics/AreaCost.vue";
 import '@smallwei/avue/lib/index.css';
 import "@/styles/flex.scss";
 import "@/styles/commonStyle.scss";
+import 'element-plus/dist/index.css';
 
 export default {
   components: { AreaCost },

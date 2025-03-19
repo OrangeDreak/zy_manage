@@ -32,7 +32,7 @@
         </el-form-item>
         <el-form-item label="说明">{{ instructions }}</el-form-item>
       </el-form>
-      <el-button type="primary" icon="el-icon-plus" size="small" @click="toEditWeightCost()"
+      <el-button type="primary" icon="el-icon-plus"  @click="toEditWeightCost()"
         >添加重量范围</el-button
       >
 
@@ -58,13 +58,12 @@
         <el-table-column label="服务费(￥)" prop="servicePrice" width="100" />
         <el-table-column label="操作" fixed="right" width="100" align="center">
           <template #default="scope">
-            <el-button type="text" size="small" @click="toEditWeightCost(scope.row, scope.$index)"
+            <el-button type="text"  @click="toEditWeightCost(scope.row, scope.$index)"
               >编辑</el-button
             >
             <el-button
               v-if="scope.$index + 1 === form.weightCostList.length"
               type="text"
-              size="small"
               @click="toDelete(scope.$index)"
               >删除</el-button
             >
@@ -74,8 +73,8 @@
 
       <template #footer class="dialog-footer">
       <div class="dialog-footer">
-        <el-button size="small" @click="closePop">取消</el-button>
-        <el-button :disabled="loading" type="primary" size="small" @click="onSubmit"
+        <el-button  @click="closePop">取消</el-button>
+        <el-button :disabled="loading" type="primary"  @click="onSubmit"
           >确定</el-button
         >
       </div>
@@ -100,6 +99,7 @@ import { calculatePriceTypeMap } from "@/config/commonConfig.js";
 import WeightCost from "@/components/pops/logistics/WeightCost.vue";
 import "@/styles/flex.scss";
 import "@/styles/commonStyle.scss";
+import 'element-plus/dist/index.css';
 
 
 export default {

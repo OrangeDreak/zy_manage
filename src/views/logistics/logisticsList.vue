@@ -190,7 +190,7 @@
           clearable
         />
       </template> -->
-      <template slot="nonsupportProductTypeListForm" #nonsupportProductTypeList-form="{ type }">
+      <template slot="nonsupportProductTypeListForm" #nonsupportProductTypeList11-form="{ type }">
         <el-cascader
           :disabled="type === 'view' || loading"
           v-model="form.nonsupportProductTypeList"
@@ -239,21 +239,18 @@
         <el-button
           type="text"
           icon="el-icon-refresh"
-          size="small"
           @click.stop="toUpdateStatus(scope.row)"
           >{{ scope.row.logisticsLineStatus ? "停用" : "启用" }}</el-button
         >
         <el-button
           type="text"
           icon="el-icon-collection-tag"
-          size="small"
           @click.stop="bindLine(scope.row)"
           >{{ scope.row.outLineId ? "编辑" : "绑定" }}外部干线</el-button
         >
         <el-button
           type="text"
           icon="el-icon-edit-outline"
-          size="small"
           @click.stop="toSetCost(scope.row.logisticsLineId)"
           >费用设置</el-button
         >
@@ -261,7 +258,6 @@
           v-if="scope.row.areaLibraryNameListDesc"
           type="text"
           icon="el-icon-truck"
-          size="small"
           @click.stop="
             showPop = true;
             logisticsLineId = scope.row.logisticsLineId;
@@ -275,6 +271,7 @@
       :showPop.sync="showPop"
       :logisticsLineId="logisticsLineId"
       @onSubmit="refreshChange"
+      @close="closeFreightCalculationPop"
     />
     <BindLineDialog ref="refBindLineDialog"></BindLineDialog>
   </div>
@@ -1024,6 +1021,9 @@ export default {
     toSetCost(id) {
       this.$router.push(`/logisticsCost?id=${id}`);
     },
+    closeFreightCalculationPop() {
+      this.showPop = false;
+    }
   },
 };
 </script>
