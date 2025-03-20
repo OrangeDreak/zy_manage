@@ -1,19 +1,11 @@
-import Vue from 'vue'
 import Clipboard from 'clipboard'
 
 function clipboardSuccess() {
-  Vue.prototype.$message({
-    message: '复制成功',
-    type: 'success',
-    duration: 1500
-  })
+  this.$message.success("复制成功");
 }
 
 function clipboardError() {
-  Vue.prototype.$message({
-    message: '复制失败',
-    type: 'error'
-  })
+  this.$message.error("复制失败");
 }
 
 export default function handleClipboard(text, event) {
