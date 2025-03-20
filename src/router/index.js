@@ -91,6 +91,12 @@ const routes = [
         component: () => import('@/views/logistics/logisticsCost.vue'),
         meta: { title: '物流费用设置' }
       },
+      {
+        path: '/order-list',
+        name: 'ForwardingOrderList',
+        component: () => import('@/views/order/ForwardingOrderList.vue'),
+        meta: { title: '订单管理' }
+      },
     ]
   }
 ]
