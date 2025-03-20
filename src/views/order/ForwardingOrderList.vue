@@ -1,5 +1,5 @@
 <template>
-  <basic-container>
+  <div class="basic-container">
     <avue-crud
       :option="option"
       :table-loading="loading"
@@ -19,16 +19,16 @@
         </div>
       </template>
     </avue-crud>
-  </basic-container>
+  </div>
 </template>
 
 <script>
 import { getForwardingList } from "@/api/order";
-import { pickerOptions } from "@/util/date";
+import { pickerOptions } from "@/utils/date";
 import '@smallwei/avue/lib/index.css';
 import "@/styles/flex.scss";
 import "@/styles/commonStyle.scss";
-
+import { ref } from "vue";
 export default {
   name: "ForwardingOrderList",
   data() {
@@ -63,9 +63,10 @@ export default {
           { label: "用户ID", prop: "userId", search: true },
           { label: "用户编码", prop: "userNo", search: true },
           {
-            label: "物流单号",
+            label: "物流信息",
             prop: "trackingNumber",
             search: true,
+            html: true,
             formatter: (val) => {
               return `<div>物流公司:${val.logisticsCompany === "" ? "--" : val.logisticsCompany}</div><div>物流单号:${
                 val.logisticsNumber || "--"
@@ -175,12 +176,10 @@ export default {
       };
       getForwardingList(param)
         .then((res) => {
-        console.log(res);
-          if (res && res.data && res.data.data) {
-            const data = res.data.data;
-            this.page.total = Number(data.total || 0);
-            this.data = data.records;
-          }
+          console.log(res);
+          this.page.total = res.total || 0;
+          this.data = res.data;
+          console.log(1);
         })
         .finally(() => {
           this.loading = false;
