@@ -15,16 +15,46 @@
     >
       <template #menu="scope, index">
         <div v-if="scope.row.trackingList">
-        <el-button type="text" @click="toDetail(scope.row)">查看物流</el-button>
+        <el-button type="text" @click="lookWl(scope.row)">查看物流</el-button>
         </div>
       </template>
     </avue-crud>
+
+    <el-dialog v-model="wlVisible" @close="closeWl">
+      <div class="wl">
+        <div class="title">基本信息:</div>
+        <el-card shadow="never">
+          <div>物流名称：{{ wlInfo.deliveryCompany }}</div>
+          <div>
+            物流单号：{{ wlInfo.trackingNumber }}
+            <i
+                    class="el-icon-copy-document"
+                    @click="copyTxt($event, wlInfo.trackingNumber)"
+                    style="font-size: 14px; color: #1890ff"
+            />
+          </div>
+        </el-card>
+        <div class="title">物流详情:</div>
+        <div class="wl-line">
+          <el-timeline>
+            <el-timeline-item
+                    v-for="(activity, index) in wlList"
+                    :key="index"
+                    :timestamp="activity.gmtCreateTime"
+            >
+              {{ activity.desc }}
+            </el-timeline-item>
+          </el-timeline>
+        </div>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
 <script>
 import { getForwardingList } from "@/api/order";
 import { pickerOptions } from "@/utils/date";
+import clipboard from "@/utils/clipboard";
 import '@smallwei/avue/lib/index.css';
 import "@/styles/flex.scss";
 import "@/styles/commonStyle.scss";
@@ -38,7 +68,9 @@ export default {
         gmtPaySuccess: [],
       },
       data: [],
-      tabsList: [],
+      wlList: [],
+      wlVisible: false,
+      wlInfo: {},
       loading: false,
       purchaseId: "",
       query: {},
@@ -192,6 +224,18 @@ export default {
     },
     finish() {
       this.refreshChange();
+    },
+
+    lookWl(item) {
+      this.wlInfo = item;
+      this.wlVisible = true;
+      this.wlList = item.trackingList;
+    },
+    closeWl() {
+      this.wlInfo = {};
+    },
+    copyTxt(even, txt) {
+      clipboard(txt, even);
     },
   },
 };
