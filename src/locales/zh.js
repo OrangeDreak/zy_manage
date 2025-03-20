@@ -14,9 +14,9 @@ export default {
   },
   menu: {
     myAccount: '我的账号',
-    transferOrder: '转运订单',
+    transferOrder: '订单列表',
     warehouse: '我的仓库',
-    package: '我的包裹',
+    package: '包裹列表',
     assets: '我的资产',
     addTransfer: '添加转运',
     dashboard: '控制台',
