@@ -58,3 +58,20 @@ export const getOrderStatus = (params) => {
     params,
   });
 };
+
+export const packageOrderEdit = (data) => {
+  return request({
+    url: "/admin/packageOrder/edit",
+    method: "post",
+    data,
+  });
+};
+
+// 修改国际物流单号
+export const changeInternationalLogisticsTrackingNumber = (params) => {
+  return request({
+    url: "/admin/packageOrder/changeInternationalLogisticsTrackingNumber",
+    method: "get",
+    params,
+  });
+};
