@@ -56,9 +56,9 @@ const routes = [
         meta: { title: '包裹列表', requiresAuth: true }
       },
       {
-        path: 'package/:id',
+        path: 'package-detail/:id',
         name: 'PackageDetail',
-        component: () => import('@/views/package/PackageDetail.vue'),
+        component: () => import('@/views/order/PackageDetail.vue'),
         meta: { title: '包裹详情', requiresAuth: true }
       },
       {
