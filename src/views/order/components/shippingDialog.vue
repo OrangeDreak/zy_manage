@@ -1,5 +1,5 @@
 <template>
-  <el-dialog :visible.sync="visible" title="订单发货" width="900px" @close="handleCancel">
+  <el-dialog v-model="visible" title="订单发货" width="900px" @close="handleCancel">
     <span slot="footer" class="dialog-footer">
       <el-button @click="handleCancel"> 取消 </el-button>
       <el-button type="primary" :loading="subLoading" @click="handleOk">确定</el-button>
