@@ -201,10 +201,10 @@ export default {
         shipping: '运输中'
       }
     }
-  }
+  },
 
 
-  addService1: "拉伸膜",
+    addService1: "拉伸膜",
     addServiceTip1:
       "增值服务项，CN￥10\n服务描述：在纸箱包裹外表面进行拉伸膜全覆盖。\n使用场景：使用拉伸膜打包包裹，可有效防潮、防水、防偷换。全品类商品都可使用。",
     addService2: "EPE泡沫填充物",
