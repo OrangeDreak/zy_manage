@@ -13,13 +13,13 @@
             @refresh-change="refreshChange"
             @on-load="onLoad"
     >
-      <template slot-scope="{ row }" slot="info">
+      <template slot-scope="{ row }" #info="scope">
         <div class="flex-row">
           <img :src="row.avatar || notAvatar" class="user-list_avatar" />
           <div class="user-list_info">
-            <div>{{ row.nickname }}</div>
-            <div>手机号：{{ row.mobile }}</div>
-            <div>邮箱：{{ row.email }}</div>
+            <div>{{ scope.row.nickname }}</div>
+            <div>手机号：{{ scope.row.mobile }}</div>
+            <div>邮箱：{{ scope.row.email }}</div>
           </div>
         </div>
       </template>
