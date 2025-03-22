@@ -226,10 +226,10 @@ export default {
       this.formState.id = data.id;
       const res = await getPackageDetail({ id: data.id });
       this.loading = false;
-      this.formState.realAmount = this.$convertFenToYuan(res.data.data.estimateFreightDeposit);
-      this.formState.realWeight = res.data.data.estimatePackageWeight;
-      this.formState.warehouseAmount = this.$convertFenToYuan(res.data.data.realFreightDeposit);
-      this.formState.warehouseWeight = res.data.data.realPackageWeight;
+      this.formState.realAmount = this.$convertFenToYuan(res.data.estimateFreightDeposit);
+      this.formState.realWeight = res.data.estimatePackageWeight;
+      this.formState.warehouseAmount = this.$convertFenToYuan(res.data.realFreightDeposit);
+      this.formState.warehouseWeight = res.data.realPackageWeight;
     },
     onWeightIpt(value) {
       // 移除所有非数字字符
