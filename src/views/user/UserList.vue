@@ -1,5 +1,5 @@
 <template>
-  <basic-container>
+  <div class="basic-container">
     <avue-crud
             :option="option"
             :table-loading="loading"
@@ -13,9 +13,22 @@
             @refresh-change="refreshChange"
             @on-load="onLoad"
     >
+      <template #search="{ size }" slot="search">
+            <el-form :model="search" :size="size" label-width="120px">
+              <el-form-item label="账户信息:" :key="1">
+                <el-input
+                  v-model="search.keyword"
+                  placeholder="请输入用户名或邮箱"
+                  filterable
+                  clearable
+                  style="width:30%"
+                />
+              </el-form-item>
+            </el-form>
+      </template>
       <template slot-scope="{ row }" #info="scope">
         <div class="flex-row">
-          <img :src="row.avatar || notAvatar" class="user-list_avatar" />
+          <img :src="scope.row.avatar || notAvatar" class="user-list_avatar" />
           <div class="user-list_info">
             <div>{{ scope.row.nickname }}</div>
             <div>手机号：{{ scope.row.mobile }}</div>
@@ -29,14 +42,15 @@
         >
       </template>
     </avue-crud>
-  </basic-container>
+  </div>
 </template>
 
 <script>
-import { getList, toFreeze} from "@/api/member/user";
+import { getList, toFreeze} from "@/api/user";
 import { convertFenToYuan, notAvatar } from "@/utils/commonUtil.js";
-@import "@/styles/flex.scss";
-@import "@/styles/commonStyle.scss";
+import "@/styles/flex.scss";
+import "@/styles/commonStyle.scss";
+import '@smallwei/avue/lib/index.css';
 
 export default {
   name: "UserList",
@@ -55,7 +69,11 @@ export default {
       option: {
         // height: "auto",
         calcHeight: 210,
-        searchMenuSpan: 6,
+        searchShow: true,
+        searchMenuSpan: 8,
+        searchSpan: 8,
+        searchLabelWidth: 120,
+        searchMenuPosition: "right",
         menuWidth: 150,
         span: 24,
         addBtn: false,
@@ -63,10 +81,10 @@ export default {
         delBtn: false,
         column: [
           { label: "用户ID", prop: "id", search: true, editDisplay: false },
-          { label: "昵称", prop: "nickname", search: true, hide: true },
+          { label: "昵称", prop: "nickname", hide: true },
           { label: "手机号", prop: "mobile", hide: true },
-          { label: "邮箱", prop: "email", search: true, hide: true },
-          { label: "客户信息", prop: "info", width: 220 },
+          { label: "邮箱", prop: "email", hide: true },
+          { label: "用户信息", prop: "info", width: 300},
           { label: "加入时间", prop: "gmtCreate" },
           { label: "最近消费时间", prop: "lastOrderTime", width: 100 },
           {
@@ -121,6 +139,7 @@ export default {
       done();
     },
     searchReset() {
+      this.search = {};
       this.query = {};
       this.onLoad(this.page);
     },
@@ -177,40 +196,5 @@ export default {
 </script>
 <style lang="scss" scoped>
 
-.user-list {
-  &-input-with-select {
-    // width: 400px;
-    // margin-right: 24px;
-  }
 
-  &-search {
-    font-size: 14px;
-    width: 120px;
-  }
-
-  &_info {
-    line-height: 1.5;
-  }
-
-  &_avatar {
-    width: 50px;
-    height: 50px;
-    border-radius: 3px;
-    object-fit: cover;
-    margin-right: 8px;
-  }
-}
-</style>
-<style>
-.user-list-input-with-select .el-select .el-input {
-  width: 100px;
-}
-
-.user-list-input-with-select .el-input-group__prepend {
-  background-color: #fff;
-}
-
-.user-list-select .el-input {
-  width: 300px;
-}
 </style>

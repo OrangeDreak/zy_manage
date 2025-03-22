@@ -22,4 +22,4 @@ export const toFreeze = (data) => {
     data,
   });
 };
-};
+
