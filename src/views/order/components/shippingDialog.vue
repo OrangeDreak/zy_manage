@@ -123,6 +123,7 @@
 <script>
 import { getPackageDetail, getTransportOrderEstimatedAmount, submitDelivery } from "@/api/order";
 import debounce from "lodash-es/debounce";
+import { convertFenToYuan } from "@/utils/commonUtil.js";
 export default {
   data() {
     return {
@@ -226,9 +227,9 @@ export default {
       this.formState.id = data.id;
       const res = await getPackageDetail({ id: data.id });
       this.loading = false;
-      this.formState.realAmount = this.$convertFenToYuan(res.data.estimateFreightDeposit);
+      this.formState.realAmount = convertFenToYuan(res.data.estimateFreightDeposit);
       this.formState.realWeight = res.data.estimatePackageWeight;
-      this.formState.warehouseAmount = this.$convertFenToYuan(res.data.realFreightDeposit);
+      this.formState.warehouseAmount = convertFenToYuan(res.data.realFreightDeposit);
       this.formState.warehouseWeight = res.data.realPackageWeight;
     },
     onWeightIpt(value) {
@@ -295,8 +296,8 @@ export default {
           weight: this.formState.changeWeight,
           costPrice: this.$convertYuanToFen(this.formState.changeAmount),
         });
-        this.formState.finallyAmount = this.$convertFenToYuan(response.data.data);
-        this.currFinallyAmount = this.$convertFenToYuan(response.data.data);
+        this.formState.finallyAmount = convertFenToYuan(response.data.data);
+        this.currFinallyAmount = convertFenToYuan(response.data.data);
       } catch {
         this.formState.finallyAmount = "";
         this.currFinallyAmount = "";
