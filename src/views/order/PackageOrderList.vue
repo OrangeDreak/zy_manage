@@ -308,7 +308,7 @@ export default {
     },
     // 点击【详情】
     toDetail(id) {
-      this.$router.push(`/order/package-detail/${id}`);
+      this.$router.push(`/package-detail/${id}`);
     },
     onShipping(row) {
       this.$refs.refShippingDialog.show({ id: row.id });

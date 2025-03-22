@@ -26,7 +26,7 @@
             ref="videoUpload"
             class="video-uploade"
             drag
-            :action="http://192.168.0.101:8081/tp/admin/resource/oss/upload"
+            action="http://192.168.0.101:8081/tp/admin/resource/oss/upload"
             accept=".mp4,.flv,.avi.rmb,.mov"
             :on-success="handleVideoSuccess"
             :before-upload="beforeUploadVideo"
