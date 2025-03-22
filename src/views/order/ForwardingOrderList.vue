@@ -24,12 +24,12 @@
       <div class="wl">
         <div class="title">基本信息:</div>
         <el-card shadow="never">
-          <div>物流名称：{{ wlInfo.deliveryCompany }}</div>
+          <div>物流名称：{{ wlInfo.logisticsCompany }}</div>
           <div>
-            物流单号：{{ wlInfo.trackingNumber }}
+            物流单号：{{ wlInfo.logisticsNumber }}
             <i
                     class="el-icon-copy-document"
-                    @click="copyTxt($event, wlInfo.trackingNumber)"
+                    @click="copyTxt($event, wlInfo.logisticsNumber)"
                     style="font-size: 14px; color: #1890ff"
             />
           </div>
@@ -40,9 +40,9 @@
             <el-timeline-item
                     v-for="(activity, index) in wlList"
                     :key="index"
-                    :timestamp="activity.gmtCreateTime"
+                    :timestamp="activity.gmtTime"
             >
-              {{ activity.desc }}
+              {{ activity.logisticsDesc }}
             </el-timeline-item>
           </el-timeline>
         </div>

@@ -4,28 +4,14 @@
     <el-header class="header">
       <div class="header-left">
         <div class="logo">QC elf</div>
-        <el-input
-          v-model="searchKeyword"
-          :placeholder="$t('header.search')"
-          class="search-input"
-        >
-          <template #prefix>
-            <el-icon><Search /></el-icon>
-          </template>
-          <template #append>
-            <el-button class="search-btn">
-              <!-- <el-icon><Search /></el-icon> -->
-              搜索
-            </el-button>
-          </template>
-        </el-input>
+        <h3><span>管理后台</span></h3>
       </div>
       
       <div class="header-right">
         <div class="nav-items">
-          <div class="nav-item">{{ $t('header.nav.freightEstimate') }}</div>
+          <!--<div class="nav-item">{{ $t('header.nav.freightEstimate') }}</div>
           <div class="nav-item">{{ $t('header.nav.transfer') }}</div>
-          <div class="nav-item">{{ $t('header.nav.help') }}</div>
+          <div class="nav-item">{{ $t('header.nav.help') }}</div> --->
         </div>
         <el-dropdown @command="handleCommand">
           <span class="user-info">
@@ -35,12 +21,12 @@
           </span>
           <template #dropdown>
             <el-dropdown-menu>
-              <el-dropdown-item command="profile">个人资料</el-dropdown-item>
+              <!-- <el-dropdown-item command="profile">个人资料</el-dropdown-item> -->
               <el-dropdown-item command="logout">退出登录</el-dropdown-item>
             </el-dropdown-menu>
           </template>
         </el-dropdown>
-        <el-dropdown @command="handleLangChange">
+        <!-- <el-dropdown @command="handleLangChange">
           <span class="lang-switch">
             {{ currentLang === 'zh' ? '中文' : 'English' }}
             <el-icon><ArrowDown /></el-icon>
@@ -51,17 +37,14 @@
               <el-dropdown-item command="en">English</el-dropdown-item>
             </el-dropdown-menu>
           </template>
-        </el-dropdown>
+        </el-dropdown> -->
       </div>
     </el-header>
 
     <el-container>
       <!-- 侧边栏 -->
       <el-aside width="200px" class="aside">
-        <!-- 用户信息 -->
-        <div class="user-panel">
-          <div class="account">{{ $t('menu.myAccount') }}</div>
-        </div>
+
 
         <!-- 导航菜单 -->
         <el-menu
