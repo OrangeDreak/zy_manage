@@ -1,9 +1,5 @@
 <template>
   <el-dialog v-model="visible" title="订单发货" width="900px" @close="handleCancel">
-    <span slot="footer" class="dialog-footer">
-      <el-button @click="handleCancel"> 取消 </el-button>
-      <el-button type="primary" :loading="subLoading" @click="handleOk">确定</el-button>
-    </span>
     <div v-loading="loading" class="send-modal">
       <el-form ref="formRef" :model="formState" label-width="140px" label-align="right">
         <el-form-item style="display: none" prop="id" label="ID"> </el-form-item>
@@ -117,6 +113,12 @@
         </el-row>
       </el-form>
     </div>
+    <template #footer class="dialog-footer">
+    <span slot="footer" class="dialog-footer">
+      <el-button @click="handleCancel"> 取消 </el-button>
+      <el-button type="primary" :loading="subLoading" @click="handleOk">确定</el-button>
+    </span>
+    </template>
   </el-dialog>
 </template>
 

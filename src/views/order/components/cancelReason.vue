@@ -1,7 +1,7 @@
 <template>
   <el-dialog
     width="500px"
-    :visible.sync="cancelVisible"
+    v-model="cancelVisible"
     :close-on-click-modal="false"
     title="取消订单"
     @close="close"
@@ -51,10 +51,12 @@
         ></el-input>
       </el-form-item>
     </el-form>
+    <template #footer class="dialog-footer">
     <span slot="footer" class="dialog-footer">
       <el-button @click="cancelVisible = false">取 消</el-button>
       <el-button type="primary" :loading="cancelLoading" @click="cancelSureOrder">确 定</el-button>
     </span>
+    </template>
   </el-dialog>
 </template>
 
