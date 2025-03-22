@@ -48,21 +48,21 @@
         :data="stashData"
       >
         <template slot="empty"> 暂无数据 </template>
-        <template slot="img" slot-scope="{ row }">
-          <el-image style="width: 80px; height: 80px" :src="row.img" :preview-src-list="[row.img]">
+        <template #img="scope">
+          <el-image style="width: 80px; height: 80px" :src="scope.row.img" :preview-src-list="[scope.row.img]">
           </el-image>
         </template>
-        <template slot="info" slot-scope="{ row }">
+        <template #info="scope">
           <div class="stash-info">
             <div class="con">
-              <!-- <div class="store">{{ row.store }}</div> -->
+              <!-- <div class="store">{{ scope.row.store }}</div> -->
               <div class="sku">
-                <span v-for="sku in row.attrList" :key="sku.attrValue">
+                <span v-for="sku in scope.row.attrList" :key="sku.attrValue">
                   <span>{{ sku.attrName }}:{{ sku.attrValue }}&nbsp;</span>
                 </span>
               </div>
             </div>
-            <div class="num">×{{ row.skuCount }}</div>
+            <div class="num">×{{ scope.row.skuCount }}</div>
           </div>
         </template>
       </avue-crud>
@@ -72,15 +72,16 @@
         class="take-table"
         :header-cell-class-name="thStyle"
         :cell-class-name="cellClassName"
+        v-model="form"
         :option="option2"
         :data="takeData"
       >
-        <template slot="info" slot-scope="{ row }">
+        <template #info="scope">
           <div class="take-info">
             <div
-              v-for="(val, key, i) in row.item"
+              v-for="(val, key, i) in scope.row.item"
               :key="key"
-              :class="[i % 2 == 0 ? 'label' : 'value', i === row.length - 1 ? 'last-item' : '']"
+              :class="[i % 2 == 0 ? 'label' : 'value', i === scope.row.length - 1 ? 'last-item' : '']"
             >
               {{ val }}
             </div>
@@ -91,17 +92,19 @@
     </el-card>
     <el-card class="list" shadow="never">
       <avue-crud :header-cell-class-name="thStyle" :option="option5" :data="packageInfoData">
-        <template slot="addService" slot-scope="{ row }">
+        <template #addService="scope">
           <div class="add-service">
-            <el-checkbox-group v-model="row.addService" disabled>
+            <el-checkbox-group v-model="scope.row.addService" disabled>
               <span v-for="item in addServiceList" :key="item.value">
-                <el-checkbox v-if="row.addService.includes(item.value)" :label="item.value"
+                <el-checkbox v-if="checkAddService(scope.row.addService, item.value)" :checked=true
                   ><span class="add-service-item"
                     >{{ item.label }}
                     <el-tooltip effect="dark" placement="top">
-                      <pre class="add-service-box" slot="content">{{ item.tip }}</pre>
-                      <i class="el-icon-question"></i></el-tooltip></span
-                ></el-checkbox>
+                        <template #content> {{ item.tip }} </template>
+                        <el-icon><QuestionFilled /></el-icon>
+                    </el-tooltip>
+                    </span>
+                </el-checkbox>
               </span>
             </el-checkbox-group>
           </div>
@@ -115,9 +118,9 @@
         :span-method="spanMethod2"
         :data="clearanceData"
       >
-        <template slot="attr" slot-scope="{ row }">
-          <el-checkbox-group v-model="row.attr">
-            <el-checkbox :label="item.label" v-for="item in row.attr" :key="item.label">{{
+        <template #attr="scope" slot-scope="{ row }">
+          <el-checkbox-group v-model="scope.row.attr">
+            <el-checkbox :label="item.label" v-for="item in scope.row.attr" :key="item.label">{{
               item.label
             }}</el-checkbox>
           </el-checkbox-group>
@@ -127,8 +130,8 @@
     </el-card>
     <el-card class="list" shadow="never">
       <avue-crud :header-cell-class-name="thStyle" :option="option4" :data="flowData">
-        <template slot="transhipmentTrackingNo" slot-scope="{ row }">
-          {{ row.transhipmentTrackingNo }}&nbsp;&nbsp;<el-button
+        <template #transhipmentTrackingNo="scope" slot-scope="{ row }">
+          {{ scope.row.transhipmentTrackingNo }}&nbsp;&nbsp;<el-button
             type="text"
             icon="el-icon-edit"
             @click="editTrackingNo"
@@ -145,19 +148,36 @@
 </template>
 
 <script>
-import countDown from "@/components/count-down";
+import countDown from "@/components/count-down/index.vue";
 import UploadVideo from "./components/uploadVideo.vue";
 import { convertFenToYuan } from "@/utils/commonUtil.js";
 import { getPackageDetail } from "@/api/order";
 import { getLabel } from "@/utils/util";
 import clipboard from "@/utils/clipboard";
+import '@smallwei/avue/lib/index.css';
 import store from "@/store";
 import TrackingNoEdit from "./components/trackingNoEdit.vue";
+import 'element-plus/dist/index.css';
+import {
+  Search,
+  Camera,
+  Bell,
+  Van,
+  Box,
+  Goods,
+  ShoppingCart,
+  Wallet,
+  Medal,
+  Share,
+  ArrowDown,
+  Plus
+} from '@element-plus/icons-vue'
 
 const payModelList = store.state.order.payModelList;
 export default {
   data() {
     return {
+      form: {},
       loading: false,
       payModelList,
       orderInfo: {
@@ -421,10 +441,10 @@ export default {
       this.loading = true;
       getPackageDetail({ id: this.$route.params.id })
         .then((res) => {
-          this.orderInfo = res.data.data || {};
-          this.orderInfo.warehouseOrderNoList = res.data.data.warehouseOrderNoList || [];
+          this.orderInfo = res.data || {};
+          this.orderInfo.warehouseOrderNoList = res.data.warehouseOrderNoList || [];
           // 包裹数据
-          const arr = res.data.data.warehouseOrderList || [];
+          const arr = res.data.warehouseOrderList || [];
           const arr2 = [];
           arr.forEach((item) => {
             const arr3 = [];
@@ -513,6 +533,7 @@ export default {
             this.countDownTime =
               new Date(this.orderInfo.gmtCreateTime).getTime() + 24 * 3 * 60 * 60 * 1000;
           }
+
         })
         .finally(() => {
           this.loading = false;
@@ -566,6 +587,9 @@ export default {
     finish() {
       this.getData();
     },
+    checkAddService(addService, value) {
+        return addService && addService.includes(value);
+    }
   },
 };
 </script>
