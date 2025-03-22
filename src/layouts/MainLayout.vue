@@ -57,7 +57,7 @@
             <span>{{ $t('menu.transferOrder') }}</span>
           </el-menu-item>
 
-          <el-menu-item index="/package">
+          <el-menu-item index="/package-list">
             <el-icon><Goods /></el-icon>
             <span>{{ $t('menu.package') }}</span>
           </el-menu-item>

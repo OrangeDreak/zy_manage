@@ -50,10 +50,10 @@ const routes = [
         meta: { title: '我的仓库', requiresAuth: true }
       },
       {
-        path: 'package',
-        name: 'MyPackage',
-        component: () => import('@/views/package/MyPackage.vue'),
-        meta: { title: '我的包裹', requiresAuth: true }
+        path: 'package-list',
+        name: 'PackageOrderList',
+        component: () => import('@/views/order/PackageOrderList.vue'),
+        meta: { title: '包裹列表', requiresAuth: true }
       },
       {
         path: 'package/:id',
