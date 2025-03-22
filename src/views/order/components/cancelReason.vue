@@ -99,19 +99,7 @@ export default {
             params.packageOrderId = this.reasonForm.orderId;
             params.remark = this.reasonForm.remark;
           } else {
-            <!--params.orderId = this.reasonForm.orderId;
-            if (this.reasonForm.remark === "其他原因") {
-              params.remark = this.reasonForm.otherReason;
-              params.remarkEn = this.reasonForm.otherReason;
-            } else {
-              params.remark = this.reasonForm.remark;
-              this.reasonList.some((item) => {
-                if (item.dictValue === this.reasonForm.remark) {
-                  params.remarkEn = item.remark;
-                  return true;
-                }
-              });
-            }-->
+
           }
           api(params)
             .then(() => {

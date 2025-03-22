@@ -239,7 +239,7 @@ export default {
     getOrderStatus({
       name: "com.x.bp.common.enums.PackageOrderStatusEnum",
     }).then((res) => {
-      const arr = res.data.data.map((item) => {
+      const arr = res.data.map((item) => {
         return {
           label: item.desc,
           value: String(item.code),
@@ -298,12 +298,9 @@ export default {
       };
       getPackageList(param)
         .then((res) => {
-          if (res.data.data) {
-            const data = res.data.data;
-            this.page.total = Number(data.total || 0);
-            const arr = data.records || [];
-            this.data = arr;
-          }
+          this.page.total = Number(res.total || 0);
+          const arr = res.data || [];
+          this.data = arr;
         })
         .finally(() => {
           this.loading = false;
