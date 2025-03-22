@@ -26,8 +26,8 @@ const routes = [
     redirect: '/transfer-list',
     children: [
       {
-        path: 'users',
-        name: 'Users',
+        path: 'user-list',
+        name: 'UserList',
         component: () => import('@/views/user/UserList.vue'),
         meta: { title: '用户管理', requiresAuth: true }
       },

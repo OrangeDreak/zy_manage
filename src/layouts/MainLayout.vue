@@ -52,6 +52,11 @@
           router
           :collapse="false"
         >
+          <el-menu-item index="/user-list">
+            <el-icon><Van /></el-icon>
+            <span>{{ $t('menu.userList') }}</span>
+          </el-menu-item>
+
           <el-menu-item index="/order-list">
             <el-icon><Van /></el-icon>
             <span>{{ $t('menu.transferOrder') }}</span>

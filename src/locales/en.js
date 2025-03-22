@@ -14,9 +14,9 @@ export default {
   },
   menu: {
     myAccount: 'My Account',
-    transferOrder: 'Transfer Orders',
+    transferOrder: 'Orders List',
     warehouse: 'My Warehouse',
-    package: 'My Packages',
+    package: 'Packages List',
     assets: 'My Assets',
     addTransfer: 'Add Transfer',
     dashboard: 'Dashboard',
@@ -25,6 +25,7 @@ export default {
     notification: 'Notifications',
     dict: 'System Dict',
     logisticsList: 'Logistics Line',
+    userList: 'User List',
   },
   assets: {
     balance: {
