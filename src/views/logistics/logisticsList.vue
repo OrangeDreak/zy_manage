@@ -374,7 +374,7 @@ export default {
             type: "upload",
             accept: ".png,.jpg,.jpeg",
             listType: "picture-img",
-            action: "http://192.168.0.101:8081/tp/admin/resource/oss/upload",
+            action: "https://www.qcelf.com/tp/admin/resource/oss/upload",
             tip: "支持jpg、png格式，建议尺寸：px，不超过2M",
             propsHttp: { url: "url", res: "data" },
             uploadBefore: (file, done, loading) => {
