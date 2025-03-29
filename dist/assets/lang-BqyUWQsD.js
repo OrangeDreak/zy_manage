@@ -1,0 +1,1 @@
+import{N as n,K as o,a as s,l}from"./index-CpyrSlfI.js";const g=n("lang",()=>{const t=o(),e=s(localStorage.getItem("lang")||"zh");return l(e,a=>{localStorage.setItem("lang",a),t.locale.value=a}),{currentLang:e,setLang:a=>{e.value=a}}});export{g as u};
