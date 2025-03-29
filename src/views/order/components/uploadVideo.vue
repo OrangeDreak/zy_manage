@@ -26,7 +26,7 @@
             ref="videoUpload"
             class="video-uploade"
             drag
-            action="https://www.qcelf.com/tp/admin/resource/oss/upload"
+            action="https://admin.qcelf.com/tp/admin/resource/oss/upload"
             accept=".mp4,.flv,.avi.rmb,.mov"
             :on-success="handleVideoSuccess"
             :before-upload="beforeUploadVideo"
