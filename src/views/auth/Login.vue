@@ -124,7 +124,7 @@ const handleLogin = async () => {
         const res = await auth.login(loginForm.value)
         authStore.setToken(res.data.token)
         ElMessage.success('登录成功')
-        router.push('/')
+        router.push('/order-list')
       } catch (error) {
         console.error('登录失败:', error)
       } finally {
