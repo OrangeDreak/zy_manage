@@ -40,16 +40,16 @@
 
       <!-- 交易表格 -->
       <el-table :data="transactionList" v-loading="loading">
-        <el-table-column :label="$t('assets.transaction.table.time')" prop="time" width="180" />
-        <el-table-column :label="$t('assets.transaction.table.type')" prop="type" width="120" />
-        <el-table-column :label="$t('assets.transaction.table.amount')" width="150">
+        <el-table-column :label="$t('assets.transaction.table.time')" prop="time"  />
+        <el-table-column :label="$t('assets.transaction.table.type')" prop="type"  />
+        <el-table-column :label="$t('assets.transaction.table.amount')" >
           <template #default="{ row }">
             <span :class="{ 'income': row.amount > 0, 'expense': row.amount < 0 }">
               {{ row.amount > 0 ? '+' : '' }}{{ row.amount }}
             </span>
           </template>
         </el-table-column>
-        <el-table-column :label="$t('assets.transaction.table.balance')" prop="balance" width="150" />
+        <el-table-column :label="$t('assets.transaction.table.balance')" prop="balance" />
       </el-table>
 
       <!-- 分页 -->
