@@ -55,10 +55,8 @@
 
 <script>
 import { getList, saveRate, delRate } from "@/api/exchange";
-import { getCurrencyList } from "@/api/fund";
 import { pickerOptions } from "@/util/date";
 import dayjs from "dayjs";
-import { getLabel } from "@/util/util";
 
 export default {
   data() {
@@ -114,20 +112,6 @@ export default {
       data: [],
       showEditPop: false,
     };
-  },
-  created() {
-    getCurrencyList().then((res) => {
-      this.option.column.forEach((item) => {
-        if (item.prop === "currency") {
-          const data = res.data.data || [];
-          data.forEach((item) => {
-            item.value = item.code;
-            item.label = item.currency;
-          });
-          item.dicData = data;
-        }
-      });
-    });
   },
   methods: {
     searchReset() {
