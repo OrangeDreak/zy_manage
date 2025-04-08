@@ -55,7 +55,7 @@
 
 <script>
 import { getList, saveRate, delRate } from "@/api/exchange";
-import { pickerOptions } from "@/util/date";
+import { pickerOptions } from "@/utils/date";
 import dayjs from "dayjs";
 
 export default {

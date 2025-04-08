@@ -76,6 +76,10 @@
             <el-icon><Notebook /></el-icon>
             <span>{{ $t('menu.dict') }}</span>
           </el-menu-item>
+          <el-menu-item index="/exchange-rate">
+             <el-icon><Switch /></el-icon>
+             <span>{{ $t('menu.exchange') }}</span>
+          </el-menu-item>
         </el-menu>
       </el-aside>
 

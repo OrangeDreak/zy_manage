@@ -74,10 +74,16 @@ const routes = [
         meta: { title: '提交转运', requiresAuth: true }
       },
       {
-        path: '/dict',
-        name: 'Dict',
-        component: () => import('@/views/system/Dict.vue'),
+        path: '/exchange-rate',
+        name: 'Exchange-rate',
+        component: () => import('@/views/system/exchange-rate.vue'),
         meta: { title: '字典管理' }
+      },
+      {
+          path: '/dict',
+          name: 'Dict',
+          component: () => import('@/views/system/Dict.vue'),
+          meta: { title: '字典管理' }
       },
       {
         path: '/logisticsList',
