@@ -18,18 +18,7 @@
       @refresh-change="refreshChange"
       @on-load="onLoad"
     >
-      <template slot="addTimeSearch" slot-scope="{}">
-        <el-date-picker
-          v-model="search.addTime"
-          valueFormat="yyyy-MM-dd HH:mm:ss"
-          :default-time="['00:00:00', '23:59:59']"
-          size="small"
-          start-placeholder="起始日期"
-          end-placeholder="结束日期"
-          type="daterange"
-        ></el-date-picker>
-      </template>
-      <template slot="rateForm" slot-scope="{}">
+      <template slot="rateForm" #rate-form="{ type }" slot-scope="{}">
         <el-input-number
           v-model="form.rate"
           :precision="4"
@@ -39,12 +28,12 @@
           placeholder="请输入汇率"
         ></el-input-number>
       </template>
-      <template slot="addTimeForm" slot-scope="{}">
+      <template slot="addTimeForm" #addTime-form="{ type }" slot-scope="{}">
         <el-date-picker
           v-model="form.addTime"
           type="datetime"
-          value-format="yyyy-MM-dd HH:mm:ss"
-          format="yyyy-MM-dd HH:mm:ss"
+          format="YYYY-MM-DD HH:mm:ss"
+          value-format="YYYY-MM-DD HH:mm:ss"
           placeholder="请选择日期"
         >
         </el-date-picker>
@@ -57,6 +46,9 @@
 import { getList, saveRate, delRate } from "@/api/exchange";
 import { pickerOptions } from "@/utils/date";
 import dayjs from "dayjs";
+import "@/styles/flex.scss";
+import "@/styles/commonStyle.scss";
+import '@smallwei/avue/lib/index.css';
 
 export default {
   data() {
@@ -103,6 +95,11 @@ export default {
             label: "汇率日期",
             prop: "addTime",
             search: true,
+            searchRange: true,
+            format:"YYYY-MM-DD HH:mm:ss",
+            valueFormat:"YYYY-MM-DD HH:mm:ss",
+
+            type: "daterange",
             pickerOptions: pickerOptions,
             rules: [{ required: true, message: "请选择汇率日期", trigger: "change" }],
             formatter: (val) => val.addTime,
@@ -144,8 +141,9 @@ export default {
         ...Object.assign(params, this.query),
       };
       if (param.addTime && param.addTime.length) {
-        param.beginTime = param.addTime[0];
-        param.endTime = param.addTime[1];
+        const addTimeArr = param.addTime.split(",");
+        param.beginTime = addTimeArr[0];
+        param.endTime = addTimeArr[1];
       }
       getList(param).then((res) => {
         this.page.total = Number(res.total || 0);

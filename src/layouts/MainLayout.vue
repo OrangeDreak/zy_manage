@@ -80,6 +80,10 @@
              <el-icon><Switch /></el-icon>
              <span>{{ $t('menu.exchange') }}</span>
           </el-menu-item>
+          <el-menu-item index="/recharge">
+             <el-icon><Wallet /></el-icon>
+             <span>{{ $t('menu.recharge') }}</span>
+           </el-menu-item>
         </el-menu>
       </el-aside>
 

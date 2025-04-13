@@ -206,8 +206,10 @@ export default {
             type: "daterange",
             search: true,
             searchRange: true,
-            valueFormat: "yyyy-MM-dd HH:mm:ss",
-            defaultTime: ["00:00:00", "23:59:59"],
+            format:"YYYY-MM-DD HH:mm:ss",
+            valueFormat:"YYYY-MM-DD HH:mm:ss",
+
+
             pickerOptions: pickerOptions,
             formatter: (val) => {
               return val.gmtCreateTime;
@@ -265,8 +267,9 @@ export default {
 
     searchChange(params, done) {
       if (params.gmtCreateTime && params.gmtCreateTime.length) {
-        params.startGmtCreateTime = params.gmtCreateTime[0];
-        params.endGmtCreateTime = params.gmtCreateTime[1];
+        const timeArr = params.gmtCreateTime.split(",");
+        params.startGmtCreateTime = timeArr[0];
+        params.endGmtCreateTime = timeArr[1];
       } else {
         delete params.startGmtCreateTime;
         delete params.endGmtCreateTime;

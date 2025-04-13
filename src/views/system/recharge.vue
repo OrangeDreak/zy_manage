@@ -18,46 +18,35 @@
         @refresh-change="refreshChange"
         @on-load="onLoad"
       >
-        <template slot="userInfo" slot-scope="{ row }">
-          <div>ID：{{ row.userId }}</div>
-          <div>昵称：{{ row.nickname }}</div>
+        <template #userInfo="scope" slot-scope="{ row }">
+          <div>ID：{{ scope.row.userId }}</div>
+          <div>昵称：{{ scope.row.nickname }}</div>
         </template>
-        <template slot="paymentEvidenceImg" slot-scope="{ row }">
+        <template #paymentEvidenceImg="scope" slot-scope="{ row }">
           <el-image
             style="height: 50px"
-            v-for="(img, index) in row.paymentEvidenceImg"
+            v-for="(img, index) in scope.row.paymentEvidenceImg"
             :key="img"
             :src="img"
             fit="cover"
-            :preview-src-list="row.paymentEvidenceImg"
+            :preview-src-list="scope.row.paymentEvidenceImg"
           >
           </el-image>
         </template>
-        <template slot="transfer" slot-scope="{ row }">
-          <template v-if="row.rechargeType === 1">
-            <div>转账人姓名：{{ row.remitterName }}</div>
-            <div>转账银行：{{ row.remittingBank }}</div>
-            <div>汇款凭证号：{{ row.referenceNo }}</div>
+        <template #transfer="scope" slot-scope="{ row }">
+          <template v-if="scope.row.rechargeType === 1">
+            <div>转账人姓名：{{ scope.row.remitterName }}</div>
+            <div>转账银行：{{ scope.row.remittingBank }}</div>
+            <div>汇款凭证号：{{ scope.row.referenceNo }}</div>
           </template>
         </template>
-        <template slot="applyStatus" slot-scope="{ row }">
-          <el-tag v-if="row.applyStatus === 0">待审核</el-tag>
-          <el-tag v-else-if="row.applyStatus === 1" type="success">审核通过</el-tag>
-          <el-tag v-else-if="row.applyStatus === -1" type="danger">审核驳回</el-tag>
+        <template #applyStatus="scope" slot-scope="{ row }">
+          <el-tag v-if="scope.row.applyStatus === 0">待审核</el-tag>
+          <el-tag v-else-if="scope.row.applyStatus === 1" type="success">审核通过</el-tag>
+          <el-tag v-else-if="scope.row.applyStatus === -1" type="danger">审核驳回</el-tag>
         </template>
-        <template slot="gmtCreatedSearch" slot-scope="{}">
-          <el-date-picker
-            v-model="search.gmtCreated"
-            valueFormat="yyyy-MM-dd HH:mm:ss"
-            :default-time="['00:00:00', '23:59:59']"
-            size="small"
-            :picker-options="pickerOptions"
-            start-placeholder="开始日期"
-            end-placeholder="结束日期"
-            type="daterange"
-          ></el-date-picker>
-        </template>
-        <template slot="transferForm" slot-scope="{ type }">
+
+        <template #transfer-form="{ type }" slot="transferForm" slot-scope="{ type }">
           <template v-if="form.remitterName">
             <div>转账人姓名：{{ form.remitterName }}</div>
             <div>转账银行：{{ form.remittingBank }}</div>
@@ -65,7 +54,7 @@
           </template>
           <template v-else>--</template>
         </template>
-        <template slot="amountForm" slot-scope="{ type }">
+        <template #amount-form="{ type }" slot="amountForm" slot-scope="{ type }">
           <div class="foreign-amount-form">
             <el-input-number
               v-model="form.amount"
@@ -92,7 +81,7 @@
             </el-select>
           </div>
         </template>
-        <template slot="realAmountForm" slot-scope="{ type }">
+        <template #realAmount-form="{ type }" slot="realAmountForm" slot-scope="{ type }">
           <div v-if="form.realAmount" class="foreign-amount-form">
             <el-input-number
               v-model="form.realAmount"
@@ -114,7 +103,7 @@
             </el-select>
           </div>
         </template>
-        <template slot="userIdForm" slot-scope="{ type }">
+        <template #userId-form="{ type }" slot="userIdForm" slot-scope="{ type }">
           <div class="user-box">
             <div class="left">
               <el-select
@@ -147,7 +136,7 @@
             </div>
           </div>
         </template>
-        <template slot="menuForm" slot-scope="{ row, index, type }">
+        <template #menu-form="{ type }" slot="menuForm" slot-scope="{ row, index, type }">
           <template v-if="type === 'edit'">
             <el-button type="primary" :loading="subLoading" size="small" @click="handleAudit(1)"
               >审核通过</el-button
@@ -158,12 +147,12 @@
           </template>
           <el-button type="pain" size="small" @click="closeDialog">取消</el-button>
         </template>
-        <template slot="menu" slot-scope="{ row }">
+        <template #menu="scope, index">
           <el-button
-            v-if="row.applyStatus === 0"
-            @click="handleToExamine(row)"
+            v-if="scope.row.applyStatus === 0"
+            @click="handleToExamine(scope.row)"
             type="text"
-            size="small"
+
             >审核</el-button
           >
         </template>
@@ -175,7 +164,8 @@
 <script>
 import { applyList, saveApply, balanceApply } from "@/api/rechargeApply";
 import { getList} from "@/api/user";
-import { pickerOptions } from "@/util/date";
+import { pickerOptions } from "@/utils/date";
+import { formatNum2, convertYuanToFen } from "@/utils/commonUtil.js";
 import "@/styles/flex.scss";
 import "@/styles/commonStyle.scss";
 import '@smallwei/avue/lib/index.css';
@@ -253,6 +243,11 @@ export default {
             search: true,
             addDisplay: false,
             editDisplay: false,
+            searchRange: true,
+            format:"YYYY-MM-DD HH:mm:ss",
+            valueFormat:"YYYY-MM-DD HH:mm:ss",
+            type: "daterange",
+            pickerOptions: pickerOptions,
             order: 0,
             width: 95,
             formatter: (val) => {
@@ -295,7 +290,7 @@ export default {
                 trigger: "change",
               },
             ],
-            value: 0,
+            value: 1,
             dicData: [
               {
                 label: "银行转账",
@@ -352,7 +347,7 @@ export default {
               return (
                 (val.currencySign ? val.currencySign : val.currency) +
                 " " +
-                vm.$formatNum2(val.amount)
+                formatNum2(val.amount)
               );
             },
           },
@@ -368,7 +363,7 @@ export default {
                 return (
                   (val.currencySign ? val.currencySign : val.currency) +
                   " " +
-                  vm.$formatNum2(val.realAmount)
+                  formatNum2(val.realAmount)
                 );
               } else {
                 return "--";
@@ -396,7 +391,7 @@ export default {
             accept: ".png,.jpg,.jpeg",
             listType: "picture-card",
             limit: 5,
-            action: "https://admin.qcelf.com/tp/admin/resource/oss/upload",
+            action: "https://qcelf.com/tp/admin/resource/oss/upload",
             tip: "支持jpg、png格式，单张图片不超过2M，最多5张",
             propsHttp: { url: "url", res: "data" },
             uploadBefore: (file, done, loading) => {
@@ -472,7 +467,7 @@ export default {
             rules: [
               {
                 required: true,
-                message: vm.$t("tip.required"),
+                message: "审核状态不能为空",
                 trigger: "blur",
               },
             ],
@@ -546,8 +541,9 @@ export default {
         ...Object.assign(params, this.query),
       };
       if (params.gmtCreated && params.gmtCreated.length) {
-        param.gmtCreatedStart = params.gmtCreated[0];
-        param.gmtCreatedEnd = params.gmtCreated[1];
+        const timeArr = params.gmtCreated.split(",");
+        param.gmtCreatedStart = timeArr[0];
+        param.gmtCreatedEnd = timeArr[1];
       } else {
         delete params.gmtCreatedStart;
         delete params.gmtCreatedEnd;
@@ -597,7 +593,7 @@ export default {
     rowSave(row, done, loading) {
       const params = { ...row };
       params.paymentEvidenceImg = params.paymentEvidenceImg.join();
-      params.amount = this.$convertYuanToFen(params.amount);
+      params.amount = convertYuanToFen(params.amount);
       saveApply(params).then(
         () => {
           done();

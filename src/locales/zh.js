@@ -26,7 +26,8 @@ export default {
     dict: '字典管理',
     logisticsList: '干线管理',
     userList: '用户管理',
-    exchange: '汇率配置'
+    exchange: '汇率配置',
+    recharge: '余额充值'
 
   },
   assets: {

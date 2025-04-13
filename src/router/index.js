@@ -103,6 +103,12 @@ const routes = [
         component: () => import('@/views/order/ForwardingOrderList.vue'),
         meta: { title: '订单管理' }
       },
+      {
+        path: '/recharge',
+        name: 'Recharge',
+        component: () => import('@/views/system/recharge.vue'),
+        meta: { title: '订单管理' }
+      },
     ]
   }
 ]

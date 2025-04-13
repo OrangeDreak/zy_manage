@@ -26,7 +26,8 @@ export default {
     dict: 'System Dict',
     logisticsList: 'Logistics Line',
     userList: 'User List',
-    exchange: 'Exchange Rate'
+    exchange: 'Exchange Rate',
+    recharge: 'Balance Recharge'
   },
   assets: {
     balance: {
