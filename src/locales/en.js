@@ -27,8 +27,11 @@ export default {
     logisticsList: 'Logistics Line',
     userList: 'User List',
     exchange: 'Exchange Rate',
-    recharge: 'Balance Recharge'
+    recharge: 'Balance Recharge',
+    ticket: 'Ticket List',
   },
+  global_cancel: "Cancel",
+  gloabl_confirm: "Confirm",
   assets: {
     balance: {
       title: 'Available Balance (USD)',
@@ -198,5 +201,33 @@ export default {
         shipping: 'Shipping'
       }
     }
-  }
+  },
+  ticket: {
+      keywordPlaceholder: 'Please enter title keywords',
+      statusPlaceholder: 'Please select the ticket status',
+      add: 'Add Ticket',
+      statusItem: {
+           submitted: 'Submitted',
+           processing: 'Processing',
+           completed: 'Completed'
+      },
+      title: 'Ticket Title',
+      status: 'Ticket Status',
+      view: 'View',
+      msgTip: 'New message received',
+      ticketForm: {
+         title: 'Add Ticket',
+         titleLabel: 'Ticket Title',
+         contentLabel: 'Issue Description',
+         titlePlaceholder: 'Please enter ticket title',
+         contentPlaceholder: 'Please enter issue description'
+      },
+      ticketDetailForm: {
+         title: 'Ticket Detail',
+         contentLabel: '',
+         contentPlaceholder: 'Please enter reply content',
+
+      }
+
+    }
 } 

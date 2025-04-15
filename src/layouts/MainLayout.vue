@@ -84,6 +84,10 @@
              <el-icon><Wallet /></el-icon>
              <span>{{ $t('menu.recharge') }}</span>
            </el-menu-item>
+           <el-menu-item index="/ticket">
+              <el-icon><Tickets /></el-icon>
+              <span>{{ $t('menu.ticket') }}</span>
+           </el-menu-item>
         </el-menu>
       </el-aside>
 

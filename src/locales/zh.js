@@ -27,9 +27,12 @@ export default {
     logisticsList: '干线管理',
     userList: '用户管理',
     exchange: '汇率配置',
-    recharge: '余额充值'
+    recharge: '余额充值',
+    ticket: '工单管理',
 
   },
+  global_cancel: "取消",
+  gloabl_confirm: "确认",
   assets: {
     balance: {
       title: '可用余额 (USD)',
@@ -242,4 +245,33 @@ export default {
     addServiceTip11: "增值服务项，CN￥1\n用于支撑鞋子内部，保护鞋子不变形",
     addService12: "商品加固-环保木浆鞋撑",
     addServiceTip12: "增值服务项，CN￥10\n用于支撑鞋子内部，保护鞋子不变形",
+
+    ticket: {
+      keywordPlaceholder: '请输入标题关键词',
+      statusPlaceholder: '请选择工单状态',
+      add: '新增工单',
+      statusItem: {
+           submitted: '已提交',
+           processing: '处理中',
+           completed: '已完结'
+      },
+      title: '工单标题',
+      status: '工单状态',
+      view: '查看',
+      msgTip: '您有新的消息',
+      ticketForm: {
+         title: '新增工单',
+         titleLabel: '工单标题',
+         contentLabel: '问题描述',
+         titlePlaceholder: '请输入工单标题',
+         contentPlaceholder: '请输入反馈问题描述'
+      },
+      ticketDetailForm: {
+         title: '工单详情',
+         contentLabel: '',
+         contentPlaceholder: '请输入回复内容',
+
+      }
+
+    }
 } 

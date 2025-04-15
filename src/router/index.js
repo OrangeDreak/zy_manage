@@ -107,7 +107,13 @@ const routes = [
         path: '/recharge',
         name: 'Recharge',
         component: () => import('@/views/system/recharge.vue'),
-        meta: { title: '订单管理' }
+        meta: { title: '余额充值' }
+      },
+      {
+        path: '/ticket',
+        name: 'Ticket',
+        component: () => import('@/views/ticket/TicketList.vue'),
+        meta: { title: '余额充值' }
       },
     ]
   }
