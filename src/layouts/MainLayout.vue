@@ -88,6 +88,10 @@
               <el-icon><Tickets /></el-icon>
               <span>{{ $t('menu.ticket') }}</span>
            </el-menu-item>
+           <el-menu-item index="/article">
+             <el-icon><Document /></el-icon>
+             <span>{{ $t('menu.article') }}</span>
+           </el-menu-item>
         </el-menu>
       </el-aside>
 

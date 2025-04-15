@@ -29,6 +29,7 @@ export default {
     exchange: '汇率配置',
     recharge: '余额充值',
     ticket: '工单管理',
+    article: '文章管理'
 
   },
   global_cancel: "取消",

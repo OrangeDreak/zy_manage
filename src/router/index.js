@@ -113,7 +113,13 @@ const routes = [
         path: '/ticket',
         name: 'Ticket',
         component: () => import('@/views/ticket/TicketList.vue'),
-        meta: { title: '余额充值' }
+        meta: { title: '工单管理' }
+      },
+      {
+         path: '/article',
+         name: 'Article',
+         component: () => import('@/views/article/index.vue'),
+         meta: { title: '工单管理' }
       },
     ]
   }

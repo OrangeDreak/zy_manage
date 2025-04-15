@@ -29,6 +29,7 @@ export default {
     exchange: 'Exchange Rate',
     recharge: 'Balance Recharge',
     ticket: 'Ticket List',
+    article: 'Article List'
   },
   global_cancel: "Cancel",
   gloabl_confirm: "Confirm",
