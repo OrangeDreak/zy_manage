@@ -93,14 +93,15 @@
             style="width: 300px"
             type="datetime"
             size="small"
-            value-format="yyyy-MM-dd HH:mm:ss"
+            format="YYYY-MM-DD HH:mm:ss"
+            valueFormat="YYYY-MM-DD HH:mm:ss"
             placeholder="选择日期"
             :picker-options="pickerOptions"
           >
           </el-date-picker>
         </el-form-item>
         <el-form-item label="内容:" prop="html">
-          <WangEditor v-model="articleForm.html" />
+          <WangEditor v-model:value="articleForm.html" />
         </el-form-item>
       </el-form>
       <div class="btns">
@@ -127,7 +128,7 @@ import {
   articleEdit,
   articleCategoryAllList,
 } from "@/api/article";
-import WangEditor from "@/components/editor";
+import WangEditor from "@/components/editor/index.vue";
 export default {
   components: { WangEditor },
   data() {
@@ -240,7 +241,7 @@ export default {
               let con = "";
               con = this.$route.query.id ? "编辑" : "创建";
               this.$message.success("文章" + con + "成功");
-              this.$router.replace("/article/index");
+              this.$router.replace("/article");
             })
             .finally(() => {
               this.loading = false;
@@ -274,7 +275,7 @@ export default {
           })
             .then(() => {
               this.$message.success("文章发布成功");
-              this.$router.replace("/article/index");
+              this.$router.replace("/article");
             })
             .finally(() => {
               this.loading = false;

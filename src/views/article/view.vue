@@ -29,7 +29,7 @@
         <div class="info">
           <el-form
             ref="form"
-            size="medium"
+            size="large"
             label-position="left"
             :model="info"
             label-width="80px"

@@ -14,49 +14,56 @@
       @refresh-change="refreshChange"
       @on-load="onLoad"
     >
-      <template slot-scope="{ row }" slot="menu">
-        <el-button type="text" @click="toDetail(row.id)">查看</el-button>
-        <el-button type="text" style="margin: 0 7px" @click="onEdit(row.id)"
+      <template #menu="scope, index" slot-scope="{ row }" slot="menu">
+        <el-button type="primary" link @click="toDetail(scope.row.id)">查看</el-button>
+        <el-button type="primary" link style="margin: 0 7px" @click="onEdit(scope.row.id)"
           >编辑</el-button
         >
         <el-popconfirm
-          v-if="row.status == 0"
+          v-if="scope.row.status == 0"
           title="确认发布吗？"
-          @confirm="onRelease(row.id)"
+          @confirm="onRelease(scope.row.id)"
         >
-          <el-button style="margin: 0 7px" slot="reference" type="text"
+          <template #reference>
+          <el-button style="margin: 0 7px"  type="primary" link
             >发布</el-button
           >
+          </template>
         </el-popconfirm>
         <el-popconfirm
-          v-if="row.status == 1"
+          v-if="scope.row.status === 1"
           title="确认下线吗？"
-          @confirm="onDown(row.id)"
+          @confirm="onDown(scope.row.id)"
         >
-          <el-button style="margin: 0 7px" slot="reference" type="text"
+          <template #reference>
+          <el-button style="margin: 0 7px"  type="primary" link
             >下线</el-button
           >
+          </template>
         </el-popconfirm>
         <el-popconfirm
-          v-if="row.status == 2"
+          v-if="scope.row.status == 2"
           title="确认上线吗？"
-          @confirm="onLine(row.id)"
+          @confirm="onLine(scope.row.id)"
         >
-          <el-button style="margin: 0 7px" slot="reference" type="text"
+          <template #reference>
+          <el-button style="margin: 0 7px"  type="primary" link
             >上线</el-button
           >
+          </template>
         </el-popconfirm>
 
-        <el-popconfirm title="确定删除该文章吗？" @confirm="onDel(row.id)">
-          <el-button type="text" slot="reference">删除</el-button>
+
+        <el-popconfirm title="确定删除该文章吗？" @confirm="onDel(scope.row.id)">
+          <template #reference><el-button type="primary" link >删除</el-button></template>
         </el-popconfirm>
       </template>
-      <template slot-scope="{ row }" slot="status">
-        <el-tag type="success" v-if="row.status === 1">已上线</el-tag>
-        <el-tag type="danger" v-else-if="row.status === 0">未发布</el-tag>
+      <template #status="scope" slot-scope="{ row }" slot="status">
+        <el-tag type="success" v-if="scope.row.status === 1">已上线</el-tag>
+        <el-tag type="danger" v-else-if="scope.row.status === 0">未发布</el-tag>
         <el-tag type="info" v-else>已下线</el-tag>
       </template>
-      <template slot="menuLeft">
+      <template #menu-left="scope" slot="menuLeft">
         <el-button
           type="primary"
           size="small"
@@ -132,9 +139,12 @@ export default {
             // search: true,
             type: "daterange",
             searchRange: true,
-            valueFormat: "yyyy-MM-dd HH:mm:ss",
+            format:"YYYY-MM-DD HH:mm:ss",
+            valueFormat:"YYYY-MM-DD HH:mm:ss",
             defaultTime: ["00:00:00", "23:59:59"],
-            formatter: (val) => val.gmtCreate,
+            formatter: (val) => {
+                return val.gmtCreate;
+            },
           },
           {
             label: "状态",
@@ -165,7 +175,7 @@ export default {
   created() {
     // 获取所有栏目列表
     articleCategoryAllList().then((res) => {
-      this.option.column[1].dicData = res.data.data || [];
+      this.option.column[1].dicData = res.data || [];
     });
   },
   methods: {
@@ -255,7 +265,7 @@ export default {
       articleList(param)
         .then((res) => {
           if (res) {
-            this.page.total = Number(res.total || 0);
+            this.page.total = res.total || 0;
             this.data = res.data || [];
           }
         })

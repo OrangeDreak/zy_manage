@@ -119,7 +119,19 @@ const routes = [
          path: '/article',
          name: 'Article',
          component: () => import('@/views/article/index.vue'),
-         meta: { title: '工单管理' }
+         meta: { title: '文章管理' }
+      },
+      {
+         path: '/article/view',
+         name: 'Article View',
+         component: () => import('@/views/article/view.vue'),
+         meta: { title: '文章详情' }
+      },
+      {
+         path: '/article/detail',
+         name: 'Article Detail',
+         component: () => import('@/views/article/detail.vue'),
+         meta: { title: '文章详情' }
       },
     ]
   }
