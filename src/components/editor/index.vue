@@ -213,7 +213,7 @@ export default {
     onChange(editor) {
       // this.$emit("change", this.html);
       // this.value=this.html
-      this.$emit("input", this.html);
+      this.$emit("update:value", this.html);
     },
     //自定义上传视频
     uploadVideo(file, insertFn) {
