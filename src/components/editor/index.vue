@@ -220,12 +220,12 @@ export default {
       let imgData = new FormData();
       imgData.append("file", file);
       axios({
-        url: this.uploadFileUrl + "api/resource/oss/upload",
+        url: "https://qcelf.com/tp/admin/resource/oss/upload",
         // data: imgData,
         timeout: 60 * 1000,
         method: "post",
       }).then((response) => {
-        if (response.data.code === 200) {
+        if (response.code === 200) {
           // 插入后端返回的url，将图片显示在页面上
           insertFn(response.data.url);
           this.$message({
@@ -240,7 +240,7 @@ export default {
       let imgData = new FormData();
       imgData.append("file", file);
       uploadImg(imgData).then((res) => {
-        insertFn(res.data.data.url);
+        insertFn(res.data.url);
         this.$message({
           type: "success",
           message: "上传成功",
